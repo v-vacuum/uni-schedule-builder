@@ -72,11 +72,23 @@ function reducer(state: SchedulerState, action: Action): SchedulerState {
     case "ADD_TO_CART": {
       return {
         ...state,
-        carts: state.carts.map((cart) =>
-          cart.id === state.activeCartId
-            ? { ...cart, items: [...cart.items, action.item] }
-            : cart
-        ),
+        carts: state.carts.map((cart) => {
+          if (cart.id !== state.activeCartId) return cart;
+          const existing = cart.items.findIndex(
+            (i) =>
+              i.courseId === action.item.courseId &&
+              i.sectionId === action.item.sectionId
+          );
+          if (existing !== -1) {
+            const updated = [...cart.items];
+            updated[existing] = {
+              ...updated[existing],
+              tutorialId: action.item.tutorialId,
+            };
+            return { ...cart, items: updated };
+          }
+          return { ...cart, items: [...cart.items, action.item] };
+        }),
       };
     }
 
