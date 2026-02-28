@@ -10,7 +10,7 @@ export function AppShell() {
   return (
     <div className="flex h-screen overflow-hidden">
       <Sidebar />
-      <div className="flex w-[340px] shrink-0 flex-col border-r border-zinc-200 bg-white">
+      <div className="flex w-[440px] shrink-0 flex-col border-r border-zinc-200 bg-white">
         <SearchFilterRow />
         <CourseInfoView />
       </div>
