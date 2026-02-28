@@ -1,20 +1,124 @@
 "use client";
 
+import { useRef, useState, useEffect } from "react";
 import { CalendarBlock, DayOfWeek } from "@/types";
 import { HOUR_HEIGHT, START_HOUR, END_HOUR } from "@/lib/utils";
-import { CourseBlock } from "./course-block";
+import { CourseBlock, BlockAnimationState } from "./course-block";
 
 interface DayColumnProps {
   day: DayOfWeek;
   blocks: CalendarBlock[];
 }
 
+interface AnimatedBlock {
+  block: CalendarBlock;
+  state: BlockAnimationState;
+}
+
 const TOTAL_HOURS = END_HOUR - START_HOUR;
+const FADE_DURATION = 150;
 
 export function DayColumn({ day, blocks }: DayColumnProps) {
+  const dayBlocks = blocks.filter((b) => b.day === day);
+
+  // Set of block IDs that have been "committed" (rendered at least one frame)
+  const committedRef = useRef<Set<string>>(new Set());
+  const prevBlocksRef = useRef<Map<string, CalendarBlock>>(new Map());
+  const [exitingBlocks, setExitingBlocks] = useState<Map<string, CalendarBlock>>(new Map());
+  const [, forceRender] = useState(0);
+  const isFirstRender = useRef(true);
+
+  // On first render, mark all current blocks as committed (no entry animation)
+  if (isFirstRender.current) {
+    isFirstRender.current = false;
+    for (const b of dayBlocks) {
+      committedRef.current.add(b.id);
+    }
+    prevBlocksRef.current = new Map(dayBlocks.map((b) => [b.id, b]));
+  }
+
+  // Detect exiting blocks on each render
+  const currentIds = new Set(dayBlocks.map((b) => b.id));
+
+  useEffect(() => {
+    const prevBlocks = prevBlocksRef.current;
+
+    // Detect exiting blocks
+    const newExiting = new Map<string, CalendarBlock>();
+    for (const [id, block] of prevBlocks) {
+      if (!currentIds.has(id)) {
+        newExiting.set(id, block);
+        committedRef.current.delete(id);
+      }
+    }
+
+    if (newExiting.size > 0) {
+      setExitingBlocks((prev) => {
+        const merged = new Map(prev);
+        for (const [id, block] of newExiting) {
+          merged.set(id, block);
+        }
+        return merged;
+      });
+      setTimeout(() => {
+        setExitingBlocks((prev) => {
+          const updated = new Map(prev);
+          for (const id of newExiting.keys()) {
+            updated.delete(id);
+          }
+          return updated;
+        });
+      }, FADE_DURATION);
+    }
+
+    // If a block reappears while still in the exiting set, cancel its exit
+    setExitingBlocks((prev) => {
+      let changed = false;
+      const updated = new Map(prev);
+      for (const id of currentIds) {
+        if (updated.has(id)) {
+          updated.delete(id);
+          changed = true;
+        }
+      }
+      return changed ? updated : prev;
+    });
+
+    // Detect entering blocks — they render this frame at opacity 0,
+    // then we commit them next frame to trigger opacity 1
+    const uncommitted: string[] = [];
+    for (const id of currentIds) {
+      if (!committedRef.current.has(id)) {
+        uncommitted.push(id);
+      }
+    }
+
+    if (uncommitted.length > 0) {
+      requestAnimationFrame(() => {
+        for (const id of uncommitted) {
+          committedRef.current.add(id);
+        }
+        forceRender((n) => n + 1);
+      });
+    }
+
+    prevBlocksRef.current = new Map(dayBlocks.map((b) => [b.id, b]));
+  });
+
   const gridlines = [];
   for (let i = 0; i <= TOTAL_HOURS; i++) {
     gridlines.push(i);
+  }
+
+  const allBlocks: AnimatedBlock[] = [];
+
+  for (const block of dayBlocks) {
+    const state: BlockAnimationState = committedRef.current.has(block.id) ? "visible" : "entering";
+    allBlocks.push({ block, state });
+  }
+
+  for (const [, block] of exitingBlocks) {
+    allBlocks.push({ block, state: "exiting" });
   }
 
   return (
@@ -26,11 +130,13 @@ export function DayColumn({ day, blocks }: DayColumnProps) {
           style={{ top: `${i * HOUR_HEIGHT}px` }}
         />
       ))}
-      {blocks
-        .filter((b) => b.day === day)
-        .map((block) => (
-          <CourseBlock key={block.id} block={block} />
-        ))}
+      {allBlocks.map(({ block, state }) => (
+        <CourseBlock
+          key={block.id}
+          block={block}
+          animationState={state}
+        />
+      ))}
     </div>
   );
 }

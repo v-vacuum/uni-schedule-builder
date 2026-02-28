@@ -3,11 +3,14 @@
 import { CalendarBlock } from "@/types";
 import { COLOR_MAP, formatTime, getBlockHeight, getBlockTop } from "@/lib/utils";
 
+export type BlockAnimationState = "entering" | "visible" | "exiting";
+
 interface CourseBlockProps {
   block: CalendarBlock;
+  animationState: BlockAnimationState;
 }
 
-export function CourseBlock({ block }: CourseBlockProps) {
+export function CourseBlock({ block, animationState }: CourseBlockProps) {
   const top = getBlockTop(block.startTime);
   const height = getBlockHeight(block.startTime, block.endTime);
   const colors = COLOR_MAP[block.color];
@@ -15,6 +18,8 @@ export function CourseBlock({ block }: CourseBlockProps) {
   const colTotal = block.conflictTotal ?? 1;
   const widthPercent = 100 / colTotal;
   const leftPercent = colIndex * widthPercent;
+
+  const opacity = animationState === "entering" || animationState === "exiting" ? 0 : 1;
 
   return (
     <div
@@ -26,6 +31,8 @@ export function CourseBlock({ block }: CourseBlockProps) {
         width: `${widthPercent}%`,
         backgroundColor: colors.bg,
         borderLeftColor: colors.border,
+        opacity,
+        transition: "opacity 150ms ease-out, left 200ms ease-out, width 200ms ease-out",
       }}
     >
       <p
