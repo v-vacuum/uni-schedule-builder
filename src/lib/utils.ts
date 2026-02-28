@@ -132,27 +132,53 @@ export function assignConflictLayout(blocks: CalendarBlock[]): CalendarBlock[] {
 
     dayBlocks.sort((a, b) => timeToMinutes(a.startTime) - timeToMinutes(b.startTime));
 
-    const columns: CalendarBlock[][] = [];
-    for (const block of dayBlocks) {
-      let placed = false;
-      for (let col = 0; col < columns.length; col++) {
-        const lastInCol = columns[col][columns[col].length - 1];
-        if (timeToMinutes(block.startTime) >= timeToMinutes(lastInCol.endTime)) {
-          columns[col].push(block);
-          placed = true;
-          break;
-        }
-      }
-      if (!placed) {
-        columns.push([block]);
+    // Find connected overlap clusters — groups of blocks where each block
+    // overlaps with at least one other block in the group
+    const blocksOverlap = (a: CalendarBlock, b: CalendarBlock) =>
+      timeToMinutes(a.startTime) < timeToMinutes(b.endTime) &&
+      timeToMinutes(b.startTime) < timeToMinutes(a.endTime);
+
+    const clusters: CalendarBlock[][] = [];
+    let currentCluster: CalendarBlock[] = [dayBlocks[0]];
+    let clusterEnd = timeToMinutes(dayBlocks[0].endTime);
+
+    for (let i = 1; i < dayBlocks.length; i++) {
+      const block = dayBlocks[i];
+      if (timeToMinutes(block.startTime) < clusterEnd) {
+        currentCluster.push(block);
+        clusterEnd = Math.max(clusterEnd, timeToMinutes(block.endTime));
+      } else {
+        clusters.push(currentCluster);
+        currentCluster = [block];
+        clusterEnd = timeToMinutes(block.endTime);
       }
     }
+    clusters.push(currentCluster);
 
-    const totalCols = columns.length;
-    for (let col = 0; col < columns.length; col++) {
-      for (const block of columns[col]) {
-        block.conflictIndex = col;
-        block.conflictTotal = totalCols;
+    // Assign columns within each cluster independently
+    for (const cluster of clusters) {
+      const columns: CalendarBlock[][] = [];
+      for (const block of cluster) {
+        let placed = false;
+        for (let col = 0; col < columns.length; col++) {
+          const lastInCol = columns[col][columns[col].length - 1];
+          if (!blocksOverlap(block, lastInCol)) {
+            columns[col].push(block);
+            placed = true;
+            break;
+          }
+        }
+        if (!placed) {
+          columns.push([block]);
+        }
+      }
+
+      const totalCols = columns.length;
+      for (let col = 0; col < columns.length; col++) {
+        for (const block of columns[col]) {
+          block.conflictIndex = col;
+          block.conflictTotal = totalCols;
+        }
       }
     }
   }
