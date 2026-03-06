@@ -117,8 +117,10 @@ export function DayColumn({ day, blocks }: DayColumnProps) {
     allBlocks.push({ block, state });
   }
 
-  for (const [, block] of exitingBlocks) {
-    allBlocks.push({ block, state: "exiting" });
+  for (const [id, block] of exitingBlocks) {
+    if (!currentIds.has(id)) {
+      allBlocks.push({ block, state: "exiting" });
+    }
   }
 
   return (
