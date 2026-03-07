@@ -23,7 +23,7 @@ export function TutorialRow({ tutorial, onAdd, alreadyInCart }: TutorialRowProps
         </span>
       </div>
       {alreadyInCart ? (
-        <span className="text-xs text-emerald-600 font-medium">Added</span>
+        <span className="flex h-6 items-center text-xs text-emerald-600 font-medium">Added</span>
       ) : (
         <button
           onClick={() => onAdd(tutorial.id)}
