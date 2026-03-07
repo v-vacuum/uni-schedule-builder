@@ -137,8 +137,10 @@ export function DayColumn({ day, blocks }: DayColumnProps) {
   }
 
   for (const [id, block] of exitingBlocks) {
-    const state: BlockAnimationState = pendingExitRef.current.has(id) ? "visible" : "exiting";
-    allBlocks.push({ block, state });
+    if (!currentIds.has(id)) {
+      const state: BlockAnimationState = pendingExitRef.current.has(id) ? "visible" : "exiting";
+      allBlocks.push({ block, state });
+    }
   }
 
   return (
