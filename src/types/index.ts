@@ -28,10 +28,62 @@ export enum CourseColor {
   ORANGE = "ORANGE",
 }
 
+export enum ClassType {
+  LECTURE = "LECTURE",
+  PROJECT = "PROJECT",
+  SEMINAR = "SEMINAR",
+  LAB = "LAB",
+}
+
+export enum DegreeType {
+  BSC = "BSC",
+  BA = "BA",
+  BCOM = "BCOM",
+  BED = "BED",
+  BENG = "BENG",
+}
+
+export enum Major {
+  COMPUTER_SCIENCE = "Computer Science",
+  SOFTWARE_ENGINEERING = "Software Engineering",
+  ELECTRICAL_ENGINEERING = "Electrical Engineering",
+  MECHANICAL_ENGINEERING = "Mechanical Engineering",
+  CIVIL_ENGINEERING = "Civil Engineering",
+  BIOMEDICAL_ENGINEERING = "Biomedical Engineering",
+  CHEMICAL_ENGINEERING = "Chemical Engineering",
+  MATHEMATICS = "Mathematics",
+  STATISTICS = "Statistics",
+  PHYSICS = "Physics",
+  CHEMISTRY = "Chemistry",
+  BIOLOGICAL_SCIENCES = "Biological Sciences",
+  NEUROSCIENCE = "Neuroscience",
+  SOCIOLOGY = "Sociology",
+  PSYCHOLOGY = "Psychology",
+  PHILOSOPHY = "Philosophy",
+  ECONOMICS = "Economics",
+  POLITICAL_SCIENCE = "Political Science",
+  ENGLISH = "English",
+  HISTORY = "History",
+  LINGUISTICS = "Linguistics",
+  KINESIOLOGY = "Kinesiology",
+  NURSING = "Nursing",
+  ACCOUNTING = "Accounting",
+  FINANCE = "Finance",
+  MARKETING = "Marketing",
+  DATA_SCIENCE = "Data Science",
+}
+
 export interface TimeSlot {
   days: DayOfWeek[];
   startTime: string; // "09:30"
   endTime: string; // "10:45"
+}
+
+export interface ReservedSeating {
+  majors: Major[];
+  reservedCapacity: number;
+  startDate: string;
+  endDate: string;
 }
 
 export interface Tutorial {
@@ -50,8 +102,10 @@ export interface LectureSection {
   timeSlot: TimeSlot;
   professor: string;
   rating: number;
+  rateMyProfUrl: string;
   location: string;
   tutorials: Tutorial[];
+  reservedSeating?: ReservedSeating[];
 }
 
 export interface Prerequisite {
@@ -68,10 +122,25 @@ export interface Course {
   code: string;
   name: string;
   description: string;
+  fullDescription: string;
   semesters: Semester[];
   enrollmentStatus: EnrollmentStatus;
   prerequisites: PrerequisiteGroup[];
   sections: LectureSection[];
+  classTypes: ClassType[];
+  requiredForMajors: Major[];
+  noCredit: boolean;
+}
+
+export interface Student {
+  id: string;
+  name: string;
+  degreeType: DegreeType;
+  major: Major;
+  minor?: Major;
+  honors: boolean;
+  concentration?: string;
+  coursesFinished: string[];
 }
 
 export interface CartItem {
