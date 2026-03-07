@@ -25,6 +25,8 @@ export function DayColumn({ day, blocks }: DayColumnProps) {
   const committedRef = useRef<Set<string>>(new Set());
   const prevBlocksRef = useRef<Map<string, CalendarBlock>>(new Map());
   const [exitingBlocks, setExitingBlocks] = useState<Map<string, CalendarBlock>>(new Map());
+  // Exiting blocks that haven't yet been "decommitted" (still at opacity 1 for one frame)
+  const pendingExitRef = useRef<Set<string>>(new Set());
   const [, forceRender] = useState(0);
   const isFirstRender = useRef(true);
 
@@ -53,6 +55,9 @@ export function DayColumn({ day, blocks }: DayColumnProps) {
     }
 
     if (newExiting.size > 0) {
+      for (const id of newExiting.keys()) {
+        pendingExitRef.current.add(id);
+      }
       setExitingBlocks((prev) => {
         const merged = new Map(prev);
         for (const [id, block] of newExiting) {
@@ -60,18 +65,32 @@ export function DayColumn({ day, blocks }: DayColumnProps) {
         }
         return merged;
       });
-      setTimeout(() => {
-        setExitingBlocks((prev) => {
-          const updated = new Map(prev);
+
+      // Double rAF ensures the browser has painted the opacity-1 frame before we transition.
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
           for (const id of newExiting.keys()) {
-            updated.delete(id);
+            pendingExitRef.current.delete(id);
           }
-          return updated;
+          forceRender((n) => n + 1);
+
+          setTimeout(() => {
+            setExitingBlocks((prev) => {
+              const updated = new Map(prev);
+              for (const id of newExiting.keys()) {
+                updated.delete(id);
+              }
+              return updated;
+            });
+          }, FADE_DURATION);
         });
-      }, FADE_DURATION);
+      });
     }
 
     // If a block reappears while still in the exiting set, cancel its exit
+    for (const id of currentIds) {
+      pendingExitRef.current.delete(id);
+    }
     setExitingBlocks((prev) => {
       let changed = false;
       const updated = new Map(prev);
@@ -119,7 +138,8 @@ export function DayColumn({ day, blocks }: DayColumnProps) {
 
   for (const [id, block] of exitingBlocks) {
     if (!currentIds.has(id)) {
-      allBlocks.push({ block, state: "exiting" });
+      const state: BlockAnimationState = pendingExitRef.current.has(id) ? "visible" : "exiting";
+      allBlocks.push({ block, state });
     }
   }
 

@@ -23,14 +23,13 @@ export function CourseBlock({ block, animationState }: CourseBlockProps) {
 
   return (
     <div
-      className="absolute overflow-hidden rounded-lg border-l-[3px] px-2 py-1.5"
+      className="absolute overflow-hidden rounded-lg px-2 py-1.5"
       style={{
         top: `${top}px`,
         height: `${height}px`,
         left: `${leftPercent}%`,
         width: `${widthPercent}%`,
         backgroundColor: colors.bg,
-        borderLeftColor: colors.border,
         opacity,
         transition: "opacity 150ms ease-out, left 200ms ease-out, width 200ms ease-out",
       }}

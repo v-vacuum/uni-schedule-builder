@@ -34,7 +34,7 @@ export function SectionCard({ section, courseId }: SectionCardProps) {
 
   return (
     <div className="rounded-xl border border-zinc-200 bg-white">
-      <div className="border-l-4 border-zinc-900 p-4">
+      <div className="p-4">
         <div className="mb-3 flex items-center justify-between">
           <span className="text-sm font-bold text-zinc-900">
             {section.code}

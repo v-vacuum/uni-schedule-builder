@@ -28,7 +28,6 @@ export function CartItemCard({ item }: CartItemCardProps) {
       className="group relative rounded-lg transition-colors"
       style={{
         backgroundColor: item.selected ? colors.bg : "#f4f4f5",
-        borderLeft: `4px solid ${item.selected ? colors.border : "#d4d4d8"}`,
       }}
     >
       <div className="flex items-start gap-2 px-3 py-2.5">

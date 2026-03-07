@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { ChevronDown, SlidersHorizontal } from "lucide-react";
 import { useScheduler } from "@/store/scheduler-context";
 import { useClickOutside } from "@/lib/use-click-outside";
@@ -21,8 +21,21 @@ const ENROLLMENT_LABELS: Record<EnrollmentStatus, string> = {
 
 export function FilterBar() {
   const [open, setOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const { state, toggleSemesterFilter, toggleEnrollmentFilter } =
     useScheduler();
+
+  useEffect(() => {
+    if (open) {
+      setMounted(true);
+    }
+  }, [open]);
+
+  const handleAnimationEnd = useCallback(() => {
+    if (!open) {
+      setMounted(false);
+    }
+  }, [open]);
 
   const close = useCallback(() => setOpen(false), []);
   const ref = useClickOutside<HTMLDivElement>(close);
@@ -46,8 +59,11 @@ export function FilterBar() {
         <ChevronDown size={14} />
       </button>
 
-      {open && (
-        <div className="absolute right-0 top-full z-50 mt-1 w-56 rounded-lg border border-zinc-200 bg-white p-3 shadow-lg">
+      {mounted && (
+        <div
+          className={`${open ? "animate-filter-in" : "animate-filter-out"} absolute right-0 top-full z-50 mt-1 w-56 rounded-lg border border-zinc-200 bg-white p-3 shadow-lg`}
+          onAnimationEnd={handleAnimationEnd}
+        >
           <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-zinc-400">
             Semester
           </p>
