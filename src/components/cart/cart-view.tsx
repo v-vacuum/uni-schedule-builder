@@ -10,7 +10,7 @@ export function CartView() {
   const { activeCart } = useScheduler();
 
   return (
-    <div className="flex w-[270px] shrink-0 flex-col border-l border-zinc-200 bg-white">
+    <div className="flex h-full w-full md:w-[270px] shrink-0 flex-col md:border-l border-zinc-200 bg-white">
       <CartHeader />
       <div className="flex-1 space-y-2 overflow-y-auto p-3">
         {activeCart.items.length === 0 ? (
