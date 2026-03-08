@@ -190,12 +190,12 @@ export const COLOR_MAP: Record<
   CourseColor,
   { bg: string; border: string; text: string }
 > = {
-  [CourseColor.PINK]: { bg: "#fee2e2", border: "#fca5a5", text: "#991b1b" },
-  [CourseColor.BLUE]: { bg: "#dbeafe", border: "#93c5fd", text: "#1e3a5f" },
-  [CourseColor.GREEN]: { bg: "#dcfce7", border: "#86efac", text: "#14532d" },
-  [CourseColor.YELLOW]: { bg: "#fef9c3", border: "#fde68a", text: "#713f12" },
-  [CourseColor.PURPLE]: { bg: "#ede9fe", border: "#c4b5fd", text: "#3b0764" },
-  [CourseColor.ORANGE]: { bg: "#fff7ed", border: "#fdba74", text: "#7c2d12" },
+  [CourseColor.BLUE]: { bg: "#ddeff6", border: "#a8d4e8", text: "#1a4d6b" },
+  [CourseColor.PINK]: { bg: "#debbed", border: "#c597d4", text: "#5c2070" },
+  [CourseColor.GREEN]: { bg: "#ddf5af", border: "#b8e06c", text: "#3d5a14" },
+  [CourseColor.PURPLE]: { bg: "#add3ff", border: "#7ab0f0", text: "#1a3d6b" },
+  [CourseColor.YELLOW]: { bg: "#f4f9ac", border: "#dce56a", text: "#5a5010" },
+  [CourseColor.ORANGE]: { bg: "#ffd6b3", border: "#f0a870", text: "#6b3a1a" },
 };
 
 const USED_COLORS: CourseColor[] = [

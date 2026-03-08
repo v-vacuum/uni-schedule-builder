@@ -544,4 +544,317 @@ export const courses: Course[] = [
       },
     ],
   },
+  {
+    id: "phil-314",
+    code: "PHIL 314",
+    name: "Information Technology Ethics",
+    description:
+      "Ethical issues in computing and information technology including privacy, intellectual property, AI bias, and professional responsibility.",
+    fullDescription:
+      "An examination of ethical issues arising from the development and use of information technology. Topics include privacy and surveillance, intellectual property and open source, algorithmic bias and fairness, autonomous systems and moral agency, professional codes of ethics, whistleblowing, and the social responsibility of technology companies. Students will apply ethical frameworks including utilitarianism, deontology, virtue ethics, and care ethics to contemporary case studies involving AI, social media, cybersecurity, and digital labor.",
+    semesters: [Semester.FALL],
+    enrollmentStatus: EnrollmentStatus.NOT_ENROLLED,
+    classTypes: [ClassType.LECTURE, ClassType.SEMINAR],
+    requiredForMajors: [],
+    noCredit: false,
+    prerequisites: [
+      {
+        options: [
+          { code: "PHIL 279", met: true },
+          { code: "PHIL 377", met: false },
+        ],
+      },
+    ],
+    sections: [
+      {
+        id: "phil-314-lec-01",
+        code: "LEC 01",
+        enrolled: 38,
+        capacity: 50,
+        waitlistCount: 0,
+        waitlistCapacity: 10,
+        timeSlot: {
+          days: [DayOfWeek.MON, DayOfWeek.WED],
+          startTime: "14:00",
+          endTime: "15:15",
+        },
+        professor: "Dr. Reid Blackman",
+        rating: 4.4,
+        rateMyProfUrl: "https://www.ratemyprofessors.com/professor/283741",
+        location: "SS 315",
+        tutorials: [],
+      },
+    ],
+  },
+  {
+    id: "cpsc-441",
+    code: "CPSC 441",
+    name: "Computer Networks",
+    description:
+      "Introduction to computer networking covering application, transport, network, and link layers. Includes socket programming labs and protocol analysis with Wireshark.",
+    fullDescription:
+      "Introduction to the concepts and protocols of computer networks. Topics include application layer protocols (HTTP, DNS, SMTP), transport layer protocols (TCP, UDP), network layer routing algorithms, link layer technologies, and network security. Students build socket-based client/server applications, analyze network traffic using Wireshark, and study real-world case studies of internet architecture, content delivery networks, and software-defined networking.",
+    semesters: [Semester.FALL, Semester.WINTER],
+    enrollmentStatus: EnrollmentStatus.NOT_ENROLLED,
+    classTypes: [ClassType.LECTURE, ClassType.LAB],
+    requiredForMajors: [Major.COMPUTER_SCIENCE],
+    noCredit: false,
+    prerequisites: [
+      { options: [{ code: "CPSC 319", met: true }] },
+      { options: [{ code: "CPSC 325", met: false }] },
+    ],
+    sections: [
+      {
+        id: "cpsc-441-lec-01",
+        code: "LEC 01",
+        enrolled: 100,
+        capacity: 120,
+        waitlistCount: 5,
+        waitlistCapacity: 20,
+        timeSlot: {
+          days: [DayOfWeek.TUE, DayOfWeek.THU],
+          startTime: "12:30",
+          endTime: "13:45",
+        },
+        professor: "Dr. Carey Williamson",
+        rating: 4.2,
+        rateMyProfUrl: "https://www.ratemyprofessors.com/professor/152873",
+        location: "ICT 122",
+        reservedSeating: [
+          {
+            majors: [Major.COMPUTER_SCIENCE],
+            reservedCapacity: 80,
+            startDate: "2025-06-01",
+            endDate: "2025-06-30",
+          },
+        ],
+        tutorials: [
+          {
+            id: "cpsc-441-t01",
+            code: "TUT 01",
+            timeSlot: {
+              days: [DayOfWeek.WED],
+              startTime: "17:00",
+              endTime: "17:50",
+            },
+          },
+          {
+            id: "cpsc-441-t02",
+            code: "TUT 02",
+            timeSlot: {
+              days: [DayOfWeek.FRI],
+              startTime: "17:00",
+              endTime: "17:50",
+            },
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: "math-311",
+    code: "MATH 311",
+    name: "Linear Methods II",
+    description:
+      "Abstract vector spaces, inner product spaces, orthogonality, eigenvalue problems, and spectral theory with applications to differential equations and data science.",
+    fullDescription:
+      "Abstract vector spaces, linear transformations, change of basis, inner product spaces, orthogonality, Gram-Schmidt process, eigenvalues and eigenvectors, diagonalization, spectral theorem for symmetric matrices, quadratic forms, singular value decomposition, and applications. Students apply linear algebra to solve systems of differential equations, analyze principal component analysis for data science, and study least-squares approximation and Fourier analysis.",
+    semesters: [Semester.FALL, Semester.WINTER],
+    enrollmentStatus: EnrollmentStatus.NOT_ENROLLED,
+    classTypes: [ClassType.LECTURE],
+    requiredForMajors: [Major.MATHEMATICS, Major.DATA_SCIENCE],
+    noCredit: false,
+    prerequisites: [
+      { options: [{ code: "MATH 211", met: true }] },
+      { options: [{ code: "MATH 271", met: true }] },
+    ],
+    sections: [
+      {
+        id: "math-311-lec-01",
+        code: "LEC 01",
+        enrolled: 85,
+        capacity: 120,
+        waitlistCount: 0,
+        waitlistCapacity: 20,
+        timeSlot: {
+          days: [DayOfWeek.MON, DayOfWeek.WED, DayOfWeek.FRI],
+          startTime: "12:00",
+          endTime: "12:50",
+        },
+        professor: "Dr. Clifton Cunningham",
+        rating: 4.0,
+        rateMyProfUrl: "https://www.ratemyprofessors.com/professor/187432",
+        location: "ST 135",
+        tutorials: [
+          {
+            id: "math-311-t01",
+            code: "TUT 01",
+            timeSlot: {
+              days: [DayOfWeek.TUE],
+              startTime: "15:00",
+              endTime: "15:50",
+            },
+          },
+          {
+            id: "math-311-t02",
+            code: "TUT 02",
+            timeSlot: {
+              days: [DayOfWeek.THU],
+              startTime: "15:00",
+              endTime: "15:50",
+            },
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: "cpsc-449",
+    code: "CPSC 449",
+    name: "Programming Paradigms",
+    description:
+      "Survey of major programming paradigms including functional, logic, and concurrent programming using Haskell, Prolog, and Erlang.",
+    fullDescription:
+      "A survey of major programming paradigms and their realization in programming languages. Topics include functional programming with Haskell, logic programming with Prolog, concurrent and distributed programming with Erlang, scripting languages, and domain-specific languages. Students compare paradigm trade-offs for expressiveness, safety, and performance, implement projects in each paradigm, and study how paradigm concepts influence modern language design in Rust, Kotlin, and TypeScript.",
+    semesters: [Semester.WINTER],
+    enrollmentStatus: EnrollmentStatus.WAITLISTED,
+    classTypes: [ClassType.LECTURE],
+    requiredForMajors: [],
+    noCredit: false,
+    prerequisites: [
+      { options: [{ code: "CPSC 319", met: true }] },
+    ],
+    sections: [
+      {
+        id: "cpsc-449-lec-01",
+        code: "LEC 01",
+        enrolled: 70,
+        capacity: 80,
+        waitlistCount: 6,
+        waitlistCapacity: 15,
+        timeSlot: {
+          days: [DayOfWeek.MON, DayOfWeek.WED, DayOfWeek.FRI],
+          startTime: "15:00",
+          endTime: "15:50",
+        },
+        professor: "Dr. Robin Cockett",
+        rating: 3.7,
+        rateMyProfUrl: "https://www.ratemyprofessors.com/professor/164382",
+        location: "MS 211",
+        tutorials: [
+          {
+            id: "cpsc-449-t01",
+            code: "TUT 01",
+            timeSlot: {
+              days: [DayOfWeek.TUE],
+              startTime: "17:00",
+              endTime: "17:50",
+            },
+          },
+        ],
+      },
+      {
+        id: "cpsc-449-lec-02",
+        code: "LEC 02",
+        enrolled: 55,
+        capacity: 80,
+        waitlistCount: 0,
+        waitlistCapacity: 15,
+        timeSlot: {
+          days: [DayOfWeek.TUE, DayOfWeek.THU],
+          startTime: "15:30",
+          endTime: "16:45",
+        },
+        professor: "Dr. Jörg Denzinger",
+        rating: 4.1,
+        rateMyProfUrl: "https://www.ratemyprofessors.com/professor/175291",
+        location: "ICT 114",
+        tutorials: [],
+      },
+    ],
+  },
+  {
+    id: "engl-393",
+    code: "ENGL 393",
+    name: "Studies in Creative Non-Fiction",
+    description:
+      "Workshop course in creative non-fiction covering memoir, personal essay, literary journalism, and hybrid forms. Intensive peer review and revision.",
+    fullDescription:
+      "A workshop course exploring major forms of creative non-fiction writing including memoir, personal essay, literary journalism, travel writing, and hybrid forms. Students read and discuss exemplary works, produce original essays through multiple drafts, participate in intensive peer review workshops, and develop a portfolio of polished creative non-fiction. Emphasis on voice, structure, research integration, and the ethics of writing about real people and events.",
+    semesters: [Semester.FALL],
+    enrollmentStatus: EnrollmentStatus.NOT_ENROLLED,
+    classTypes: [ClassType.SEMINAR],
+    requiredForMajors: [Major.ENGLISH],
+    noCredit: false,
+    prerequisites: [
+      { options: [{ code: "ENGL 251", met: false }] },
+    ],
+    sections: [
+      {
+        id: "engl-393-lec-01",
+        code: "SEM 01",
+        enrolled: 20,
+        capacity: 20,
+        waitlistCount: 4,
+        waitlistCapacity: 5,
+        timeSlot: {
+          days: [DayOfWeek.TUE, DayOfWeek.THU],
+          startTime: "13:00",
+          endTime: "14:15",
+        },
+        professor: "Dr. Suzette Mayr",
+        rating: 4.9,
+        rateMyProfUrl: "https://www.ratemyprofessors.com/professor/198472",
+        location: "CHC 201",
+        tutorials: [],
+      },
+    ],
+  },
+  {
+    id: "soci-325",
+    code: "SOCI 325",
+    name: "Sociology of Law",
+    description:
+      "Sociological analysis of law and legal institutions covering jurisprudence, dispute resolution, legal professions, and law as an instrument of social change.",
+    fullDescription:
+      "An introduction to the sociological study of law and legal institutions. Topics include theories of law and society, the relationship between law and social norms, dispute resolution processes, the legal profession, law and social inequality, and law as an instrument of social change. Students analyze landmark court cases, examine the role of law in reproducing or challenging systems of power, and explore contemporary debates around criminal justice reform, Indigenous legal traditions, and access to justice.",
+    semesters: [Semester.FALL, Semester.WINTER],
+    enrollmentStatus: EnrollmentStatus.NOT_ENROLLED,
+    classTypes: [ClassType.LECTURE],
+    requiredForMajors: [Major.SOCIOLOGY],
+    noCredit: false,
+    prerequisites: [
+      { options: [{ code: "SOCI 201", met: true }] },
+    ],
+    sections: [
+      {
+        id: "soci-325-lec-01",
+        code: "LEC 01",
+        enrolled: 55,
+        capacity: 60,
+        waitlistCount: 2,
+        waitlistCapacity: 10,
+        timeSlot: {
+          days: [DayOfWeek.MON, DayOfWeek.WED],
+          startTime: "11:00",
+          endTime: "12:15",
+        },
+        professor: "Dr. Dawn Moore",
+        rating: 4.3,
+        rateMyProfUrl: "https://www.ratemyprofessors.com/professor/214583",
+        location: "SS 105",
+        tutorials: [
+          {
+            id: "soci-325-t01",
+            code: "TUT 01",
+            timeSlot: {
+              days: [DayOfWeek.FRI],
+              startTime: "11:00",
+              endTime: "11:50",
+            },
+          },
+        ],
+      },
+    ],
+  },
 ];
