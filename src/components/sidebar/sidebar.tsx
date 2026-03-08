@@ -1,21 +1,21 @@
 "use client";
 
-import { BookOpen, Settings, User } from "lucide-react";
+import { BookOpen, GraduationCap, Settings } from "lucide-react";
 import { SidebarIcon } from "./sidebar-icon";
 
 export function Sidebar() {
   return (
-    <aside className="flex w-16 shrink-0 flex-col items-center justify-between bg-zinc-900 py-4">
-      <div className="flex flex-col items-center gap-3">
-        <SidebarIcon active>
-          <User size={22} />
+    <aside className="flex w-[52px] shrink-0 flex-col items-center justify-between border-r border-zinc-300 bg-zinc-50 py-5">
+      <div className="flex flex-col items-center gap-4">
+        <SidebarIcon active aria-label="Courses">
+          <BookOpen size={18} />
         </SidebarIcon>
-        <SidebarIcon>
-          <BookOpen size={22} />
+        <SidebarIcon aria-label="Degrees">
+          <GraduationCap size={18} />
         </SidebarIcon>
       </div>
-      <SidebarIcon>
-        <Settings size={22} />
+      <SidebarIcon aria-label="Settings">
+        <Settings size={20} />
       </SidebarIcon>
     </aside>
   );

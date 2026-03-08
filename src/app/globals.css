@@ -2,9 +2,29 @@
 
 @theme inline {
   --color-background: #ffffff;
-  --color-foreground: #18181b;
-  --font-sans: var(--font-geist-sans);
+  --color-foreground: #1A1A1A;
+  --font-sans: var(--font-inter);
   --font-mono: var(--font-geist-mono);
+
+  /* Override zinc palette to match style guide */
+  --color-zinc-50: #FAFAFA;
+  --color-zinc-100: #F0F0F0;
+  --color-zinc-200: #E8E8E8;
+  --color-zinc-300: #D4D4D4;
+  --color-zinc-400: #AAAAAA;
+  --color-zinc-500: #777777;
+  --color-zinc-600: #555555;
+  --color-zinc-700: #444444;
+  --color-zinc-800: #333333;
+  --color-zinc-900: #1A1A1A;
+  --color-zinc-950: #111111;
+
+  /* Status colors */
+  --color-active: #00D26A;
+  --color-rating: #F59E0B;
+  --color-warning: #FEB38A;
+  --color-error-bg: #FEE2E2;
+  --color-error: #991B1B;
 }
 
 body {
@@ -24,7 +44,7 @@ body {
 }
 
 .animate-filter-in {
-  animation: filter-dropdown-in 150ms ease-out forwards;
+  animation: filter-dropdown-in 100ms ease-out forwards;
   transform-origin: top right;
 }
 
@@ -40,6 +60,80 @@ body {
 }
 
 .animate-filter-out {
-  animation: filter-dropdown-out 150ms ease-out forwards;
+  animation: filter-dropdown-out 100ms ease-out forwards;
   transform-origin: top right;
+}
+
+@keyframes dropdown-in {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.animate-dropdown-in {
+  animation: dropdown-in 100ms ease-out forwards;
+  transform-origin: top left;
+}
+
+@keyframes dropdown-out {
+  from { opacity: 1; transform: scale(1); }
+  to { opacity: 0; transform: scale(0.9); }
+}
+
+.animate-dropdown-out {
+  animation: dropdown-out 100ms ease-out forwards;
+  transform-origin: top left;
+}
+
+@keyframes crossfade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-crossfade-in {
+  animation: crossfade-in 250ms ease-out forwards;
+}
+
+@keyframes crossfade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+.animate-crossfade-out {
+  animation: crossfade-out 250ms ease-in forwards;
+}
+
+@keyframes cart-item-in {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-cart-item-in {
+  animation: cart-item-in 200ms ease-out forwards;
+}
+
+@keyframes cart-item-out {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(-4px); }
+}
+
+.animate-cart-item-out {
+  animation: cart-item-out 150ms ease-in forwards;
+}
+
+@keyframes tooltip-in {
+  from { opacity: 0; transform: translateY(2px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-tooltip-in {
+  animation: tooltip-in 150ms ease-out forwards;
+}
+
+@keyframes tooltip-out {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(2px); }
+}
+
+.animate-tooltip-out {
+  animation: tooltip-out 100ms ease-in forwards;
 }

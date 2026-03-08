@@ -2,7 +2,7 @@
 
 import {
   createContext,
-  useContext,
+  use,
   useReducer,
   useMemo,
   type ReactNode,
@@ -14,7 +14,9 @@ import {
   CalendarBlock,
   Cart,
   CartItem,
+  ClassType,
   CourseColor,
+  DayOfWeek,
   EnrollmentStatus,
   Semester,
 } from "@/types";
@@ -33,6 +35,15 @@ interface SchedulerState {
   filters: {
     semesters: Semester[];
     enrollmentStatuses: EnrollmentStatus[];
+    classTypes: ClassType[];
+    days: DayOfWeek[];
+    startTime: string;
+    endTime: string;
+    fitsSchedule: boolean;
+    hasOpenSeats: boolean;
+    countsTowardsDegree: boolean;
+    requiredForMajor: boolean;
+    minProfRating: number;
   };
 }
 
@@ -48,17 +59,30 @@ type Action =
   | { type: "RENAME_CART"; cartId: string; name: string }
   | { type: "SET_SEARCH_QUERY"; query: string }
   | { type: "TOGGLE_SEMESTER_FILTER"; semester: Semester }
-  | { type: "TOGGLE_ENROLLMENT_FILTER"; status: EnrollmentStatus };
+  | { type: "TOGGLE_ENROLLMENT_FILTER"; status: EnrollmentStatus }
+  | { type: "SET_FILTERS"; filters: SchedulerState["filters"] }
+  | { type: "CLEAR_FILTERS" };
+
+const DEFAULT_FILTERS: SchedulerState["filters"] = {
+  semesters: [],
+  enrollmentStatuses: [],
+  classTypes: [],
+  days: [],
+  startTime: "",
+  endTime: "",
+  fitsSchedule: false,
+  hasOpenSeats: false,
+  countsTowardsDegree: false,
+  requiredForMajor: false,
+  minProfRating: 0,
+};
 
 const initialState: SchedulerState = {
   selectedCourseId: null,
   carts: defaultCarts,
   activeCartId: defaultCarts[0].id,
   searchQuery: "",
-  filters: {
-    semesters: [],
-    enrollmentStatuses: [],
-  },
+  filters: { ...DEFAULT_FILTERS },
 };
 
 function reducer(state: SchedulerState, action: Action): SchedulerState {
@@ -188,6 +212,12 @@ function reducer(state: SchedulerState, action: Action): SchedulerState {
       return { ...state, filters: { ...state.filters, enrollmentStatuses } };
     }
 
+    case "SET_FILTERS":
+      return { ...state, filters: action.filters };
+
+    case "CLEAR_FILTERS":
+      return { ...state, filters: { ...DEFAULT_FILTERS } };
+
     default:
       return state;
   }
@@ -216,6 +246,8 @@ interface SchedulerContextValue {
   setSearchQuery: (query: string) => void;
   toggleSemesterFilter: (semester: Semester) => void;
   toggleEnrollmentFilter: (status: EnrollmentStatus) => void;
+  setFilters: (filters: SchedulerState["filters"]) => void;
+  clearFilters: () => void;
 }
 
 const SchedulerContext = createContext<SchedulerContextValue | null>(null);
@@ -331,25 +363,58 @@ export function SchedulerProvider({ children }: { children: ReactNode }) {
       dispatch({ type: "TOGGLE_ENROLLMENT_FILTER", status }),
     []
   );
+  const setFilters = useCallback(
+    (filters: SchedulerState["filters"]) =>
+      dispatch({ type: "SET_FILTERS", filters }),
+    []
+  );
+  const clearFilters = useCallback(
+    () => dispatch({ type: "CLEAR_FILTERS" }),
+    []
+  );
 
-  const value: SchedulerContextValue = {
-    state,
-    activeCart,
-    calendarBlocks,
-    conflicts,
-    selectCourse,
-    clearSelection,
-    addToCart,
-    removeFromCart,
-    toggleCartItem,
-    switchCart,
-    createCart,
-    deleteCart,
-    renameCart,
-    setSearchQuery,
-    toggleSemesterFilter,
-    toggleEnrollmentFilter,
-  };
+  const value = useMemo<SchedulerContextValue>(
+    () => ({
+      state,
+      activeCart,
+      calendarBlocks,
+      conflicts,
+      selectCourse,
+      clearSelection,
+      addToCart,
+      removeFromCart,
+      toggleCartItem,
+      switchCart,
+      createCart,
+      deleteCart,
+      renameCart,
+      setSearchQuery,
+      toggleSemesterFilter,
+      toggleEnrollmentFilter,
+      setFilters,
+      clearFilters,
+    }),
+    [
+      state,
+      activeCart,
+      calendarBlocks,
+      conflicts,
+      selectCourse,
+      clearSelection,
+      addToCart,
+      removeFromCart,
+      toggleCartItem,
+      switchCart,
+      createCart,
+      deleteCart,
+      renameCart,
+      setSearchQuery,
+      toggleSemesterFilter,
+      toggleEnrollmentFilter,
+      setFilters,
+      clearFilters,
+    ]
+  );
 
   return (
     <SchedulerContext.Provider value={value}>
@@ -359,7 +424,7 @@ export function SchedulerProvider({ children }: { children: ReactNode }) {
 }
 
 export function useScheduler() {
-  const ctx = useContext(SchedulerContext);
+  const ctx = use(SchedulerContext);
   if (!ctx) throw new Error("useScheduler must be used within SchedulerProvider");
   return ctx;
 }

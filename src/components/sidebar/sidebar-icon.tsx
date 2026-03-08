@@ -4,16 +4,18 @@ interface SidebarIconProps {
   children: React.ReactNode;
   active?: boolean;
   onClick?: () => void;
+  "aria-label": string;
 }
 
-export function SidebarIcon({ children, active, onClick }: SidebarIconProps) {
+export function SidebarIcon({ children, active, onClick, "aria-label": ariaLabel }: SidebarIconProps) {
   return (
     <button
       onClick={onClick}
-      className={`flex h-10 w-10 items-center justify-center rounded-xl transition-colors ${
+      aria-label={ariaLabel}
+      className={`flex h-8 w-8 items-center justify-center rounded-full transition-colors focus-visible:ring-2 focus-visible:ring-zinc-400 focus-visible:outline-none ${
         active
-          ? "bg-white/20 text-white"
-          : "text-zinc-400 hover:bg-white/10 hover:text-white"
+          ? "bg-zinc-200 text-zinc-900"
+          : "text-zinc-500 hover:bg-zinc-200 hover:text-zinc-900"
       }`}
     >
       {children}

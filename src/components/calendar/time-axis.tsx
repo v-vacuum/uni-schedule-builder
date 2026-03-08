@@ -9,14 +9,14 @@ export function TimeAxis() {
   }
 
   return (
-    <div className="relative w-16 shrink-0">
+    <div className="relative w-11 shrink-0">
       {hours.map((h) => {
         const period = h >= 12 ? "PM" : "AM";
         const display = h > 12 ? h - 12 : h === 0 ? 12 : h;
         return (
           <div
             key={h}
-            className="absolute right-2 -translate-y-1/2 text-[10px] text-zinc-400"
+            className="absolute right-1 -translate-y-1/2 text-[9px] font-medium text-zinc-400"
             style={{ top: `${(h - START_HOUR) * HOUR_HEIGHT}px` }}
           >
             {display}{period}
