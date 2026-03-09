@@ -6,6 +6,19 @@ import { PrerequisiteGroup } from "@/types";
 import { useScheduler } from "@/store/scheduler-context";
 import { PrereqTooltip } from "./prereq-tooltip";
 
+const adjustTooltipPosition = (el: HTMLDivElement | null) => {
+  if (!el) return;
+  el.style.left = "0";
+  el.style.right = "auto";
+  const rect = el.getBoundingClientRect();
+  const overflowParent = el.closest<HTMLElement>(".overflow-hidden, [class*='overflow-hidden']");
+  const bound = overflowParent ? overflowParent.getBoundingClientRect().right : window.innerWidth;
+  if (rect.right > bound) {
+    el.style.left = "auto";
+    el.style.right = "0";
+  }
+};
+
 interface PrerequisitesProps {
   groups: PrerequisiteGroup[];
 }
@@ -69,18 +82,20 @@ export function Prerequisites({ groups }: PrerequisitesProps) {
                     onBlur={handleMouseLeave}
                   >
                     <span
-                      className="inline-flex cursor-default items-center gap-0.5 rounded-full border border-orange-200 bg-orange-50 px-2 py-0.5 text-xs font-medium text-orange-700"
+                      className="inline-flex cursor-default items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-semibold text-zinc-900"
+                      style={{ backgroundColor: "#feb38a", paddingLeft: "6px", letterSpacing: "0.3px" }}
                       role="button"
                       tabIndex={0}
                       aria-label={`Info about ${prereq.code}`}
                     >
                       <X size={10} strokeWidth={3} />
                       {prereq.code}
-                      <Info size={12} className="ml-0.5 text-orange-400" />
+                      <Info size={12} className="ml-0.5" />
                     </span>
                     {mountedPrereq === prereq.code && (
                       <div
-                        className={`absolute left-0 top-full z-50 mt-2 ${hoveredPrereq === prereq.code ? "animate-tooltip-in" : "animate-tooltip-out"}`}
+                        ref={adjustTooltipPosition}
+                        className={`absolute top-full z-50 ${hoveredPrereq === prereq.code ? "animate-tooltip-in" : "animate-tooltip-out"}`}
                         onMouseEnter={() => {
                           clearTimeout(hoverTimerRef.current);
                           setHoveredPrereq(prereq.code);
@@ -88,10 +103,19 @@ export function Prerequisites({ groups }: PrerequisitesProps) {
                         onMouseLeave={handleMouseLeave}
                         onAnimationEnd={handleTooltipAnimationEnd}
                       >
-                        <PrereqTooltip
-                          courseCode={prereq.code}
-                          onGoToCourse={selectCourse}
-                        />
+                        <div className="relative pt-3">
+                          <div
+                            className="absolute top-0 left-1/2 h-3 -translate-x-1/2"
+                            style={{
+                              width: "calc(100% + 80px)",
+                              clipPath: "polygon(50% 0, 0 100%, 100% 100%)",
+                            }}
+                          />
+                          <PrereqTooltip
+                            courseCode={prereq.code}
+                            onGoToCourse={selectCourse}
+                          />
+                        </div>
                       </div>
                     )}
                   </div>
