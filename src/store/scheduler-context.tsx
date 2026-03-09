@@ -5,6 +5,7 @@ import {
   use,
   useReducer,
   useMemo,
+  useState,
   type ReactNode,
   useCallback,
 } from "react";
@@ -15,7 +16,6 @@ import {
   Cart,
   CartItem,
   ClassType,
-  CourseColor,
   DayOfWeek,
   EnrollmentStatus,
   Semester,
@@ -234,6 +234,9 @@ interface SchedulerContextValue {
   activeCart: Cart;
   calendarBlocks: CalendarBlock[];
   conflicts: ConflictInfo[];
+  isCheckoutMode: boolean;
+  enterCheckout: () => void;
+  exitCheckout: () => void;
   selectCourse: (courseId: string) => void;
   clearSelection: () => void;
   addToCart: (courseId: string, sectionId: string, tutorialId?: string) => void;
@@ -254,6 +257,9 @@ const SchedulerContext = createContext<SchedulerContextValue | null>(null);
 
 export function SchedulerProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const [isCheckoutMode, setIsCheckoutMode] = useState(false);
+  const enterCheckout = useCallback(() => setIsCheckoutMode(true), []);
+  const exitCheckout = useCallback(() => setIsCheckoutMode(false), []);
 
   const activeCart = useMemo(
     () => state.carts.find((c) => c.id === state.activeCartId) ?? state.carts[0],
@@ -267,7 +273,7 @@ export function SchedulerProvider({ children }: { children: ReactNode }) {
 
   const conflicts = useMemo(() => {
     const result: ConflictInfo[] = [];
-    const items = activeCart.items.filter((i) => i.selected);
+    const items = activeCart.items;
 
     for (let i = 0; i < items.length; i++) {
       const courseA = allCourses.find((c) => c.id === items[i].courseId);
@@ -275,6 +281,11 @@ export function SchedulerProvider({ children }: { children: ReactNode }) {
         (s) => s.id === items[i].sectionId
       );
       if (!courseA || !sectionA) continue;
+
+      const tutorialA = items[i].tutorialId
+        ? sectionA.tutorials.find((t) => t.id === items[i].tutorialId)
+        : null;
+      const slotsA = [sectionA.timeSlot, ...(tutorialA ? [tutorialA.timeSlot] : [])];
 
       const conflictsWith: string[] = [];
 
@@ -286,7 +297,13 @@ export function SchedulerProvider({ children }: { children: ReactNode }) {
         );
         if (!courseB || !sectionB) continue;
 
-        if (timeSlotsOverlap(sectionA.timeSlot, sectionB.timeSlot)) {
+        const tutorialB = items[j].tutorialId
+          ? sectionB.tutorials.find((t) => t.id === items[j].tutorialId)
+          : null;
+        const slotsB = [sectionB.timeSlot, ...(tutorialB ? [tutorialB.timeSlot] : [])];
+
+        const hasOverlap = slotsA.some((a) => slotsB.some((b) => timeSlotsOverlap(a, b)));
+        if (hasOverlap) {
           conflictsWith.push(courseB.code);
         }
       }
@@ -379,6 +396,9 @@ export function SchedulerProvider({ children }: { children: ReactNode }) {
       activeCart,
       calendarBlocks,
       conflicts,
+      isCheckoutMode,
+      enterCheckout,
+      exitCheckout,
       selectCourse,
       clearSelection,
       addToCart,
@@ -399,6 +419,9 @@ export function SchedulerProvider({ children }: { children: ReactNode }) {
       activeCart,
       calendarBlocks,
       conflicts,
+      isCheckoutMode,
+      enterCheckout,
+      exitCheckout,
       selectCourse,
       clearSelection,
       addToCart,

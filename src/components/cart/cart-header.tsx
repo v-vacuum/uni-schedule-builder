@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { ChevronDown, ChevronUp, Plus } from "lucide-react";
 import { useScheduler } from "@/store/scheduler-context";
 import { useClickOutside } from "@/lib/use-click-outside";
@@ -14,9 +14,12 @@ export function CartHeader() {
   const close = useCallback(() => setDropdownOpen(false), []);
   const ref = useClickOutside<HTMLDivElement>(close);
 
-  useEffect(() => {
-    if (dropdownOpen) setMounted(true);
-  }, [dropdownOpen]);
+  const toggleDropdown = useCallback(() => {
+    setDropdownOpen((prev) => {
+      if (!prev) setMounted(true);
+      return !prev;
+    });
+  }, []);
 
   const handleAnimationEnd = useCallback(() => {
     if (!dropdownOpen) setMounted(false);
@@ -26,7 +29,7 @@ export function CartHeader() {
     <div className="flex h-11 items-center gap-2 border-b border-zinc-300 px-3.5">
       <div className="relative" ref={ref}>
         <button
-          onClick={() => setDropdownOpen(!dropdownOpen)}
+          onClick={toggleDropdown}
           aria-expanded={dropdownOpen}
           aria-haspopup="menu"
           className="flex items-center gap-1 text-[13px] font-extrabold text-zinc-900 focus-visible:ring-2 focus-visible:ring-zinc-400 focus-visible:outline-none rounded"

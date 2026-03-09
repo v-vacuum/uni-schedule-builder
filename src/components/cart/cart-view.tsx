@@ -87,7 +87,7 @@ export function CartView() {
   }, [activeCart.id, activeCart.items]);
 
   return (
-    <div className="flex h-full w-full md:w-[270px] shrink-0 flex-col md:border-x border-zinc-300 bg-zinc-50">
+    <div className="flex h-full w-full shrink-0 flex-col bg-zinc-50">
       <CartHeader />
       <div className="flex-1 space-y-1.5 overflow-y-auto px-2.5 py-2">
         {activeCart.items.length === 0 && animatedItems.filter((ai) => ai.state === "exiting").length === 0 ? (
