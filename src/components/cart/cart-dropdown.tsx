@@ -29,7 +29,7 @@ export function CartDropdown({ onClose, animationClass, onAnimationEnd }: CartDr
 
   return (
     <div
-      className={`absolute left-0 top-full z-50 mt-1 w-52 rounded-xl border border-zinc-200 bg-white py-1 shadow-lg ${animationClass ?? ""}`}
+      className={`absolute left-0 top-full z-50 mt-1 w-60 rounded border border-zinc-200 bg-white py-1 shadow-lg ${animationClass ?? ""}`}
       onKeyDown={(e) => { if (e.key === "Escape") onClose(); }}
       onAnimationEnd={onAnimationEnd}
     >
@@ -43,7 +43,7 @@ export function CartDropdown({ onClose, animationClass, onAnimationEnd }: CartDr
         return (
           <div
             key={cart.id}
-            className="group flex items-center justify-between px-4 py-2.5 hover:bg-zinc-50"
+            className="group flex items-center justify-between border-t border-zinc-100 first:border-t-0 px-4 py-2.5 hover:bg-zinc-50"
           >
             {editingId === cart.id ? (
               <input
@@ -70,17 +70,17 @@ export function CartDropdown({ onClose, animationClass, onAnimationEnd }: CartDr
                   {cart.name}
                 </button>
                 {isActive ? (
-                  <span className="rounded-full bg-emerald-100 px-2 py-0.5 text-[10px] font-medium text-emerald-700">
+                  <span className="rounded-full bg-[#ddf5af] px-2 py-0.5 text-[10px] font-medium text-zinc-700">
                     Selected
                   </span>
                 ) : (
-                  <div className="flex items-center gap-0.5 opacity-0 transition-opacity group-hover:opacity-100 group-focus-within:opacity-100">
+                  <div className="flex items-center gap-1 opacity-0 transition-opacity group-hover:opacity-100 group-focus-within:opacity-100">
                     <button
                       onClick={() => startEditing(cart.id, cart.name)}
                       aria-label={`Rename ${cart.name}`}
                       className="rounded p-0.5 text-zinc-400 hover:text-zinc-700 focus-visible:ring-2 focus-visible:ring-zinc-400 focus-visible:outline-none"
                     >
-                      <Pencil size={12} />
+                      <Pencil size={16} />
                     </button>
                     {state.carts.length > 1 && (
                       <button
@@ -88,7 +88,7 @@ export function CartDropdown({ onClose, animationClass, onAnimationEnd }: CartDr
                         aria-label={`Delete ${cart.name}`}
                         className="rounded p-0.5 text-zinc-400 hover:text-red-600 focus-visible:ring-2 focus-visible:ring-zinc-400 focus-visible:outline-none"
                       >
-                        <Trash2 size={12} />
+                        <Trash2 size={16} />
                       </button>
                     )}
                   </div>
