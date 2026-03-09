@@ -8,9 +8,10 @@ interface CartDropdownProps {
   onClose: () => void;
   animationClass?: string;
   onAnimationEnd?: () => void;
+  readOnly?: boolean;
 }
 
-export function CartDropdown({ onClose, animationClass, onAnimationEnd }: CartDropdownProps) {
+export function CartDropdown({ onClose, animationClass, onAnimationEnd, readOnly }: CartDropdownProps) {
   const { state, switchCart, deleteCart, renameCart } = useScheduler();
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editName, setEditName] = useState("");
@@ -45,7 +46,7 @@ export function CartDropdown({ onClose, animationClass, onAnimationEnd }: CartDr
             key={cart.id}
             className="group flex items-center justify-between px-4 py-2.5 hover:bg-zinc-50"
           >
-            {editingId === cart.id ? (
+            {!readOnly && editingId === cart.id ? (
               <input
                 autoFocus
                 aria-label="Cart name"
@@ -73,7 +74,7 @@ export function CartDropdown({ onClose, animationClass, onAnimationEnd }: CartDr
                   <span className="rounded-full bg-emerald-100 px-2 py-0.5 text-[10px] font-medium text-emerald-700">
                     Selected
                   </span>
-                ) : (
+                ) : !readOnly ? (
                   <div className="flex items-center gap-0.5 opacity-0 transition-opacity group-hover:opacity-100 group-focus-within:opacity-100">
                     <button
                       onClick={() => startEditing(cart.id, cart.name)}
@@ -92,7 +93,7 @@ export function CartDropdown({ onClose, animationClass, onAnimationEnd }: CartDr
                       </button>
                     )}
                   </div>
-                )}
+                ) : null}
               </>
             )}
           </div>
