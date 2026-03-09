@@ -1,12 +1,12 @@
 "use client";
 
-import { useMemo, useRef, useEffect, useState, useCallback } from "react";
+import { useMemo, useRef, useLayoutEffect, useState, useCallback } from "react";
 import { useScheduler } from "@/store/scheduler-context";
 import { searchCourses, getAllCourses, getCourseById } from "@/lib/api";
 import { SearchFilterRow } from "@/components/search/search-filter-row";
 import { EmptyState } from "./empty-state";
 import { NoResultsState } from "./no-results-state";
-import { CourseTopBar, CourseInfo, SEMESTER_LABELS, ENROLLMENT_COLORS } from "./course-header";
+import { CourseTopBar, CourseTopBarFrame, CourseTopBarPills, CourseInfo, SEMESTER_LABELS, ENROLLMENT_COLORS } from "./course-header";
 import { CourseDescription } from "./course-description";
 import { Prerequisites } from "./prerequisites";
 import { SectionCard } from "./section-card";
@@ -95,10 +95,11 @@ export function CourseInfoView() {
   const prevSelectedRef = useRef<string | null>(null);
   const detailScrollRef = useRef<HTMLDivElement>(null);
   const [outgoingCourse, setOutgoingCourse] = useState<Course | null>(null);
+  const [crossfadePhase, setCrossfadePhase] = useState<"out" | "in" | null>(null);
 
   const displayCourse = selectedCourse ?? lastCourseRef.current;
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const prevId = prevSelectedRef.current;
     const currentId = state.selectedCourseId;
 
@@ -110,9 +111,7 @@ export function CourseInfoView() {
       } else if (prevId !== null && currentId !== null) {
         setOutgoingCourse(lastCourseRef.current ?? null);
         setTransition("crossfade");
-        if (detailScrollRef.current) {
-          detailScrollRef.current.scrollTop = 0;
-        }
+        setCrossfadePhase("out");
       }
     }
 
@@ -126,8 +125,19 @@ export function CourseInfoView() {
     setTransition(null);
   }, []);
 
-  const handleCrossfadeEnd = useCallback(() => {
+  const handleFadeOutEnd = useCallback(() => {
     setOutgoingCourse(null);
+    setCrossfadePhase("in");
+  }, []);
+
+  useLayoutEffect(() => {
+    if (crossfadePhase === "in" && detailScrollRef.current) {
+      detailScrollRef.current.scrollTop = 0;
+    }
+  }, [crossfadePhase]);
+
+  const handleFadeInEnd = useCallback(() => {
+    setCrossfadePhase(null);
     setTransition(null);
   }, []);
 
@@ -158,6 +168,12 @@ export function CourseInfoView() {
   const CourseDetailPanel = ({ course }: { course: Course }) => (
     <div className="flex flex-1 flex-col overflow-y-auto">
       <CourseTopBar course={course} />
+      <CourseDetailContent course={course} />
+    </div>
+  );
+
+  const CourseDetailContent = ({ course }: { course: Course }) => (
+    <>
       <div className="bg-white px-5 py-4 space-y-2.5">
         <CourseInfo course={course} />
         <CourseDescription text={course.fullDescription} />
@@ -178,7 +194,7 @@ export function CourseInfoView() {
           />
         ))}
       </div>
-    </div>
+    </>
   );
 
   return (
@@ -244,26 +260,47 @@ export function CourseInfoView() {
         )}
       </div>
 
-      {/* Outgoing course (fading out during crossfade) */}
-      {isCrossfading && outgoingCourse && (
-        <div
-          className="absolute inset-0 flex flex-col animate-crossfade-out"
-          onAnimationEnd={handleCrossfadeEnd}
-        >
-          <CourseDetailPanel course={outgoingCourse} />
+      {/* Crossfade: persistent top bar frame + fading pills & content */}
+      {isCrossfading && (
+        <div className="absolute inset-0 flex flex-col">
+          <div className="flex h-11 shrink-0 items-center gap-2.5 border-b border-zinc-300 bg-white px-4 z-10 relative">
+            <CourseTopBarFrame />
+            {crossfadePhase === "out" && outgoingCourse && (
+              <div className="absolute right-4 flex items-center gap-2.5 animate-crossfade-out">
+                <CourseTopBarPills course={outgoingCourse} />
+              </div>
+            )}
+            {crossfadePhase === "in" && displayCourse && (
+              <div className="absolute right-4 flex items-center gap-2.5 animate-crossfade-in">
+                <CourseTopBarPills course={displayCourse} />
+              </div>
+            )}
+          </div>
+          <div className="relative flex-1 overflow-hidden">
+            {crossfadePhase === "out" && outgoingCourse && (
+              <div className="absolute inset-0 flex flex-col overflow-y-auto animate-crossfade-out" onAnimationEnd={handleFadeOutEnd}>
+                <CourseDetailContent course={outgoingCourse} />
+              </div>
+            )}
+            {crossfadePhase === "in" && displayCourse && (
+              <div ref={detailScrollRef} className="absolute inset-0 flex flex-col overflow-y-auto animate-crossfade-in" onAnimationEnd={handleFadeInEnd}>
+                <CourseDetailContent course={displayCourse} />
+              </div>
+            )}
+          </div>
         </div>
       )}
 
-      {/* Course detail panel */}
-      {displayCourse && (
+      {/* Course detail panel (normal slide transitions) */}
+      {!isCrossfading && displayCourse && (
         <div
           ref={detailScrollRef}
-          className={`absolute inset-0 flex flex-col ${isCrossfading ? "animate-crossfade-in" : ""}`}
+          className="absolute inset-0 flex flex-col"
           style={{
             ...detailStyle(),
-            ...(!isCrossfading ? { transition: `transform ${SLIDE_DURATION}ms ease-in-out` } : {}),
+            transition: `transform ${SLIDE_DURATION}ms ease-in-out`,
           }}
-          onTransitionEnd={courseSelected && !isCrossfading ? handleTransitionEnd : undefined}
+          onTransitionEnd={courseSelected ? handleTransitionEnd : undefined}
         >
           <CourseDetailPanel course={displayCourse} />
         </div>
