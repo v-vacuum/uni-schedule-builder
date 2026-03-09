@@ -44553,22 +44553,11 @@
                   "type": "text",
                   "id": "8GmmX",
                   "name": "dateLine",
-                  "fill": "#888888",
-                  "content": "March 8, 2026  ·  Fall 2025 Semester",
+                  "fill": "#555555",
+                  "content": "March 8, 2026  ·  #ENR-2025F-00847",
                   "fontFamily": "Inter",
                   "fontSize": 11,
-                  "fontWeight": "normal"
-                },
-                {
-                  "type": "text",
-                  "id": "8yXmA",
-                  "name": "confLine",
-                  "fill": "#AAAAAA",
-                  "content": "#ENR-2025F-00847",
-                  "fontFamily": "Inter",
-                  "fontSize": 10,
-                  "fontWeight": "500",
-                  "letterSpacing": 0.5
+                  "fontWeight": "500"
                 }
               ]
             },
@@ -44598,9 +44587,9 @@
                   "fill": "#00D26A",
                   "content": "ENROLLED",
                   "fontFamily": "Inter",
-                  "fontSize": 9,
-                  "fontWeight": "700",
-                  "letterSpacing": 1.5
+                  "fontSize": 11,
+                  "fontWeight": "800",
+                  "letterSpacing": 1
                 },
                 {
                   "type": "frame",
@@ -44673,20 +44662,35 @@
                           "id": "o3vwb",
                           "name": "i1cr",
                           "fill": "#1A1A1A",
-                          "content": "3 cr",
+                          "content": "3 credits",
                           "fontFamily": "Inter",
                           "fontSize": 12,
                           "fontWeight": "700"
                         },
                         {
-                          "type": "text",
-                          "id": "GRO5W",
-                          "name": "i1status",
-                          "fill": "#00D26A",
-                          "content": "✓ enrolled",
-                          "fontFamily": "Inter",
-                          "fontSize": 10,
-                          "fontWeight": "600"
+                          "type": "frame",
+                          "id": "t0xXL",
+                          "name": "p1",
+                          "fill": "#ddf5af",
+                          "cornerRadius": 100,
+                          "padding": [
+                            2,
+                            8
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "eSWC0",
+                              "name": "p1t",
+                              "fill": "#4A6B1A",
+                              "content": "Enrolled",
+                              "fontFamily": "Inter",
+                              "fontSize": 9,
+                              "fontWeight": "600",
+                              "letterSpacing": 0.3
+                            }
+                          ]
                         }
                       ]
                     }
@@ -44763,20 +44767,35 @@
                           "id": "x54T3",
                           "name": "i2cr",
                           "fill": "#1A1A1A",
-                          "content": "3 cr",
+                          "content": "3 credits",
                           "fontFamily": "Inter",
                           "fontSize": 12,
                           "fontWeight": "700"
                         },
                         {
-                          "type": "text",
-                          "id": "50rGd",
-                          "name": "i2status",
-                          "fill": "#00D26A",
-                          "content": "✓ enrolled",
-                          "fontFamily": "Inter",
-                          "fontSize": 10,
-                          "fontWeight": "600"
+                          "type": "frame",
+                          "id": "pHRvw",
+                          "name": "p2",
+                          "fill": "#ddf5af",
+                          "cornerRadius": 100,
+                          "padding": [
+                            2,
+                            8
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "licZ3",
+                              "name": "p2t",
+                              "fill": "#4A6B1A",
+                              "content": "Enrolled",
+                              "fontFamily": "Inter",
+                              "fontSize": 9,
+                              "fontWeight": "600",
+                              "letterSpacing": 0.3
+                            }
+                          ]
                         }
                       ]
                     }
@@ -44853,20 +44872,35 @@
                           "id": "8NS5m",
                           "name": "i3cr",
                           "fill": "#1A1A1A",
-                          "content": "3 cr",
+                          "content": "3 credits",
                           "fontFamily": "Inter",
                           "fontSize": 12,
                           "fontWeight": "700"
                         },
                         {
-                          "type": "text",
-                          "id": "oC7T5",
-                          "name": "i3status",
-                          "fill": "#00D26A",
-                          "content": "✓ enrolled",
-                          "fontFamily": "Inter",
-                          "fontSize": 10,
-                          "fontWeight": "600"
+                          "type": "frame",
+                          "id": "6EXO7",
+                          "name": "p3",
+                          "fill": "#ddf5af",
+                          "cornerRadius": 100,
+                          "padding": [
+                            2,
+                            8
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "NpSud",
+                              "name": "p3t",
+                              "fill": "#4A6B1A",
+                              "content": "Enrolled",
+                              "fontFamily": "Inter",
+                              "fontSize": 9,
+                              "fontWeight": "600",
+                              "letterSpacing": 0.3
+                            }
+                          ]
                         }
                       ]
                     }
@@ -44877,7 +44911,7 @@
                   "id": "dTVjh",
                   "name": "spacer1",
                   "width": "fill_container",
-                  "height": 4
+                  "height": 10
                 },
                 {
                   "type": "text",
@@ -44886,9 +44920,9 @@
                   "fill": "#F59E0B",
                   "content": "WAITLISTED",
                   "fontFamily": "Inter",
-                  "fontSize": 9,
-                  "fontWeight": "700",
-                  "letterSpacing": 1.5
+                  "fontSize": 11,
+                  "fontWeight": "800",
+                  "letterSpacing": 1
                 },
                 {
                   "type": "frame",
@@ -44961,20 +44995,44 @@
                           "id": "WCoxt",
                           "name": "i4cr",
                           "fill": "#1A1A1A",
-                          "content": "3 cr",
+                          "content": "3 credits",
                           "fontFamily": "Inter",
                           "fontSize": 12,
                           "fontWeight": "700"
                         },
                         {
-                          "type": "text",
-                          "id": "Nu0Ku",
-                          "name": "i4status",
-                          "fill": "#92400E",
-                          "content": "⏳ position #3",
-                          "fontFamily": "Inter",
-                          "fontSize": 10,
-                          "fontWeight": "600"
+                          "type": "frame",
+                          "id": "QAiNB",
+                          "name": "p4",
+                          "gap": 4,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "YIfL0",
+                              "name": "p4b",
+                              "fill": "#FEF3C7",
+                              "cornerRadius": 100,
+                              "padding": [
+                                2,
+                                8
+                              ],
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "3qbYQ",
+                                  "name": "p4bt",
+                                  "fill": "#92400E",
+                                  "content": "Waitlisted: Position #3",
+                                  "fontFamily": "Inter",
+                                  "fontSize": 9,
+                                  "fontWeight": "600",
+                                  "letterSpacing": 0.3
+                                }
+                              ]
+                            }
+                          ]
                         }
                       ]
                     }
@@ -44985,7 +45043,7 @@
                   "id": "a7jrp",
                   "name": "spacer2",
                   "width": "fill_container",
-                  "height": 4
+                  "height": 10
                 },
                 {
                   "type": "text",
@@ -44994,9 +45052,9 @@
                   "fill": "#991B1B",
                   "content": "NOT ENROLLED",
                   "fontFamily": "Inter",
-                  "fontSize": 9,
-                  "fontWeight": "700",
-                  "letterSpacing": 1.5
+                  "fontSize": 11,
+                  "fontWeight": "800",
+                  "letterSpacing": 1
                 },
                 {
                   "type": "frame",
@@ -45062,20 +45120,35 @@
                           "id": "JMWjz",
                           "name": "i5cr",
                           "fill": "#AAAAAA",
-                          "content": "3 cr",
+                          "content": "3 credits",
                           "fontFamily": "Inter",
                           "fontSize": 12,
                           "fontWeight": "700"
                         },
                         {
-                          "type": "text",
-                          "id": "Anodr",
-                          "name": "i5status",
-                          "fill": "#991B1B",
-                          "content": "✗ blocked",
-                          "fontFamily": "Inter",
-                          "fontSize": 10,
-                          "fontWeight": "600"
+                          "type": "frame",
+                          "id": "GpBVk",
+                          "name": "p5",
+                          "fill": "#FEE2E2",
+                          "cornerRadius": 100,
+                          "padding": [
+                            2,
+                            8
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "5i1l4",
+                              "name": "p5t",
+                              "fill": "#991B1B",
+                              "content": "Blocked",
+                              "fontFamily": "Inter",
+                              "fontSize": 9,
+                              "fontWeight": "600",
+                              "letterSpacing": 0.3
+                            }
+                          ]
                         }
                       ]
                     }
@@ -45194,47 +45267,6 @@
                       "fontFamily": "Inter",
                       "fontSize": 13,
                       "fontWeight": "700"
-                    }
-                  ]
-                },
-                {
-                  "type": "frame",
-                  "id": "wcTUA",
-                  "name": "btnSecondary",
-                  "width": "fill_container",
-                  "cornerRadius": 2,
-                  "stroke": {
-                    "align": "inside",
-                    "thickness": 1,
-                    "fill": "#D4D4D4"
-                  },
-                  "gap": 8,
-                  "padding": [
-                    12,
-                    0
-                  ],
-                  "justifyContent": "center",
-                  "alignItems": "center",
-                  "children": [
-                    {
-                      "type": "icon_font",
-                      "id": "npUGF",
-                      "name": "btnI2",
-                      "width": 14,
-                      "height": 14,
-                      "iconFontName": "printer",
-                      "iconFontFamily": "lucide",
-                      "fill": "#555555"
-                    },
-                    {
-                      "type": "text",
-                      "id": "XDuPB",
-                      "name": "btnT2",
-                      "fill": "#555555",
-                      "content": "Print Receipt",
-                      "fontFamily": "Inter",
-                      "fontSize": 13,
-                      "fontWeight": "600"
                     }
                   ]
                 },
