@@ -1,58 +1,88 @@
 "use client";
 
 import { ArrowLeft } from "lucide-react";
-import { Pill } from "@/components/ui/pill";
 import { useScheduler } from "@/store/scheduler-context";
 import { Course, EnrollmentStatus, Semester } from "@/types";
 
-const SEMESTER_LABELS: Record<Semester, string> = {
+export const SEMESTER_LABELS: Record<Semester, string> = {
   [Semester.FALL]: "Fall",
   [Semester.WINTER]: "Winter",
   [Semester.SPRING]: "Spring",
   [Semester.SUMMER]: "Summer",
 };
 
-const ENROLLMENT_VARIANT = {
-  [EnrollmentStatus.ENROLLED]: "success",
-  [EnrollmentStatus.NOT_ENROLLED]: "neutral",
-  [EnrollmentStatus.WAITLISTED]: "warning",
-} as const;
-
-const ENROLLMENT_LABEL = {
-  [EnrollmentStatus.ENROLLED]: "Enrolled",
-  [EnrollmentStatus.NOT_ENROLLED]: "Not Enrolled",
-  [EnrollmentStatus.WAITLISTED]: "Waitlisted",
-} as const;
+export const ENROLLMENT_COLORS: Record<EnrollmentStatus, { bg: string; label: string } | null> = {
+  [EnrollmentStatus.ENROLLED]: { bg: "#ddf5af", label: "Enrolled" },
+  [EnrollmentStatus.WAITLISTED]: { bg: "#f4f9ac", label: "Waitlisted" },
+  [EnrollmentStatus.NOT_ENROLLED]: null,
+};
 
 interface CourseHeaderProps {
   course: Course;
 }
 
-export function CourseHeader({ course }: CourseHeaderProps) {
+export function CourseTopBar({ course }: CourseHeaderProps) {
   const { clearSelection } = useScheduler();
 
   return (
-    <div className="space-y-2">
-      <div className="flex items-center gap-2">
-        <button
-          onClick={clearSelection}
-          className="flex h-7 w-7 items-center justify-center rounded-lg text-zinc-400 transition-colors hover:bg-zinc-100 hover:text-zinc-700"
+    <div className="flex h-11 shrink-0 items-center gap-2.5 border-b border-zinc-300 px-4">
+      <button
+        onClick={clearSelection}
+        aria-label="Back to course list"
+        className="flex shrink-0 items-center justify-center text-zinc-900 transition-colors hover:text-zinc-600 focus-visible:ring-2 focus-visible:ring-zinc-400 focus-visible:outline-none rounded"
+      >
+        <ArrowLeft size={16} />
+      </button>
+      <div className="flex-1" />
+      <CourseTopBarPills course={course} />
+    </div>
+  );
+}
+
+export function CourseTopBarPills({ course }: CourseHeaderProps) {
+  const enrollment = ENROLLMENT_COLORS[course.enrollmentStatus];
+
+  return (
+    <>
+      <span className="inline-flex items-center rounded-full bg-zinc-900 px-2.5 py-1 text-[11px] font-bold tracking-wider text-white">
+        {course.semesters.map((s) => SEMESTER_LABELS[s]).join(", ")}
+      </span>
+      {enrollment && (
+        <span
+          className="inline-flex items-center rounded-full px-2.5 py-1 text-[11px] font-semibold tracking-wide text-zinc-900"
+          style={{ backgroundColor: enrollment.bg }}
         >
-          <ArrowLeft size={18} />
-        </button>
-        <div className="flex flex-wrap items-center gap-1.5">
-          <Pill variant="outlined">
-            {course.semesters.map((s) => SEMESTER_LABELS[s]).join(", ")}
-          </Pill>
-          <Pill variant={ENROLLMENT_VARIANT[course.enrollmentStatus]}>
-            {ENROLLMENT_LABEL[course.enrollmentStatus]}
-          </Pill>
-        </div>
-      </div>
-      <h2 className="text-3xl font-black tracking-tight text-zinc-900">
+          {enrollment.label}
+        </span>
+      )}
+    </>
+  );
+}
+
+export function CourseTopBarFrame() {
+  const { clearSelection } = useScheduler();
+
+  return (
+    <>
+      <button
+        onClick={clearSelection}
+        aria-label="Back to course list"
+        className="flex shrink-0 items-center justify-center text-zinc-900 transition-colors hover:text-zinc-600 focus-visible:ring-2 focus-visible:ring-zinc-400 focus-visible:outline-none rounded"
+      >
+        <ArrowLeft size={16} />
+      </button>
+      <div className="flex-1" />
+    </>
+  );
+}
+
+export function CourseInfo({ course }: CourseHeaderProps) {
+  return (
+    <div className="space-y-2.5">
+      <h2 className="text-[32px] font-black tracking-tight text-zinc-900 leading-none" style={{ letterSpacing: "-1px" }}>
         {course.code}
       </h2>
-      <p className="text-base text-zinc-500">{course.name}</p>
+      <p className="text-[13px] text-zinc-500">{course.name}</p>
     </div>
   );
 }

@@ -7,11 +7,11 @@ import { TimeAxis } from "./time-axis";
 import { DayColumn } from "./day-column";
 
 const DAYS = [
-  { key: DayOfWeek.MON, label: "Mon" },
-  { key: DayOfWeek.TUE, label: "Tue" },
-  { key: DayOfWeek.WED, label: "Wed" },
-  { key: DayOfWeek.THU, label: "Thu" },
-  { key: DayOfWeek.FRI, label: "Fri" },
+  { key: DayOfWeek.MON, label: "MON" },
+  { key: DayOfWeek.TUE, label: "TUE" },
+  { key: DayOfWeek.WED, label: "WED" },
+  { key: DayOfWeek.THU, label: "THU" },
+  { key: DayOfWeek.FRI, label: "FRI" },
 ];
 
 const TOTAL_HOURS = END_HOUR - START_HOUR;
@@ -21,21 +21,21 @@ export function CalendarGrid() {
 
   return (
     <div className="flex flex-1 flex-col overflow-hidden">
-      <div className="flex border-b border-zinc-100">
-        <div className="w-16 shrink-0" />
+      <div className="flex border-b border-r border-zinc-300">
+        <div className="w-11 shrink-0" />
         {DAYS.map((day) => (
           <div
             key={day.key}
-            className="flex-1 border-l border-zinc-100 py-2 text-center text-xs font-semibold uppercase tracking-wider text-zinc-500"
+            className="flex-1 border-l border-zinc-300 py-2 text-center text-[11px] font-semibold text-zinc-500"
           >
             {day.label}
           </div>
         ))}
       </div>
-      <div className="flex flex-1 overflow-y-auto">
+      <div className="flex flex-1 overflow-y-auto border-b border-zinc-300 bg-white">
         <TimeAxis />
         <div
-          className="flex flex-1"
+          className="flex flex-1 border-r border-zinc-300"
           style={{ height: `${TOTAL_HOURS * HOUR_HEIGHT}px` }}
         >
           {DAYS.map((day) => (
