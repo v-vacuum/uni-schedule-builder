@@ -17,7 +17,7 @@ const SLIDE_DURATION = 300;
 type TransitionType = "slide-in" | "slide-out" | "crossfade" | null;
 
 export function CourseInfoView() {
-  const { state, selectCourse } = useScheduler();
+  const { state, selectCourse, getEffectiveEnrollmentStatus } = useScheduler();
 
   const hasActiveFilters = useMemo(() => {
     const f = state.filters;
@@ -49,7 +49,7 @@ export function CourseInfoView() {
     }
     if (state.filters.enrollmentStatuses.length > 0) {
       results = results.filter((c) =>
-        state.filters.enrollmentStatuses.includes(c.enrollmentStatus)
+        state.filters.enrollmentStatuses.includes(getEffectiveEnrollmentStatus(c.id))
       );
     }
     if (state.filters.classTypes.length > 0) {
@@ -190,7 +190,7 @@ export function CourseInfoView() {
             key={section.id}
             section={section}
             courseId={course.id}
-            enrollmentStatus={course.enrollmentStatus}
+            enrollmentStatus={getEffectiveEnrollmentStatus(course.id)}
           />
         ))}
       </div>
@@ -217,7 +217,7 @@ export function CourseInfoView() {
           <div className="flex-1 overflow-y-auto">
             <div>
               {filteredCourses.map((course) => {
-                const enrollment = ENROLLMENT_COLORS[course.enrollmentStatus];
+                const enrollment = ENROLLMENT_COLORS[getEffectiveEnrollmentStatus(course.id)];
                 return (
                   <button
                     key={course.id}

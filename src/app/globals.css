@@ -137,3 +137,40 @@ body {
 .animate-tooltip-out {
   animation: tooltip-out 100ms ease-in forwards;
 }
+
+@keyframes overlay-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-overlay-in {
+  animation: overlay-in 300ms ease-out forwards;
+}
+
+@keyframes receipt-in {
+  from { opacity: 0; transform: translateY(20px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.animate-receipt-in {
+  animation: receipt-in 400ms cubic-bezier(0.16, 1, 0.3, 1) 150ms forwards;
+  opacity: 0;
+}
+
+@keyframes receipt-pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+.animate-receipt-pulse {
+  animation: receipt-pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes receipt-content-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-receipt-content-in {
+  animation: receipt-content-in 300ms ease-out forwards;
+}

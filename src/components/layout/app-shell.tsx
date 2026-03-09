@@ -6,6 +6,7 @@ import { Sidebar } from "@/components/sidebar/sidebar";
 import { CourseInfoView } from "@/components/course-info/course-info-view";
 import { CartView } from "@/components/cart/cart-view";
 import { CheckoutView } from "@/components/checkout/checkout-view";
+import { SuccessReceipt } from "@/components/checkout/success-receipt";
 import { ScheduleView } from "@/components/calendar/schedule-view";
 import { useScheduler } from "@/store/scheduler-context";
 
@@ -19,7 +20,7 @@ const TABS: { id: MobileTab; label: string; icon: typeof BookOpen }[] = [
 
 export function AppShell() {
   const [activeTab, setActiveTab] = useState<MobileTab>("courses");
-  const { state, isCheckoutMode } = useScheduler();
+  const { state, isCheckoutMode, isSuccessMode } = useScheduler();
   const courseSelected = state.selectedCourseId !== null;
 
   return (
@@ -128,6 +129,8 @@ export function AppShell() {
           </nav>
         )}
       </div>
+
+      {isSuccessMode && <SuccessReceipt />}
     </>
   );
 }

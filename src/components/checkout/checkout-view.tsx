@@ -11,7 +11,7 @@ import { CartDropdown } from "@/components/cart/cart-dropdown";
 const CREDITS_PER_COURSE = 3;
 
 export function CheckoutView() {
-  const { activeCart, conflicts, exitCheckout } = useScheduler();
+  const { activeCart, conflicts, exitCheckout, confirmEnrollment } = useScheduler();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
 
@@ -160,7 +160,7 @@ export function CheckoutView() {
             Cancel
           </button>
           <button
-            onClick={exitCheckout}
+            onClick={confirmEnrollment}
             className="flex w-full items-center justify-center rounded-sm bg-zinc-900 py-2.5 text-[12px] font-bold text-white transition-colors hover:bg-zinc-800"
           >
             {hasIssues ? "Enroll Anyway" : "Enroll"}
