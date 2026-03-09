@@ -83,7 +83,7 @@ export function Prerequisites({ groups }: PrerequisitesProps) {
                   >
                     <span
                       className="inline-flex cursor-default items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-semibold text-zinc-900"
-                      style={{ backgroundColor: "#f9c9a3", paddingLeft: "6px", letterSpacing: "0.3px" }}
+                      style={{ backgroundColor: "#feb38a", paddingLeft: "6px", letterSpacing: "0.3px" }}
                       role="button"
                       tabIndex={0}
                       aria-label={`Info about ${prereq.code}`}

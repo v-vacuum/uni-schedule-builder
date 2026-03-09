@@ -54,7 +54,7 @@ export function PrereqTooltip({ courseCode, onGoToCourse }: PrereqTooltipProps) 
                 <span
                   key={prereq.code}
                   className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-semibold text-zinc-900"
-                  style={{ backgroundColor: prereq.met ? "#ddf5af" : "#f9c9a3", paddingLeft: "6px", letterSpacing: "0.3px" }}
+                  style={{ backgroundColor: prereq.met ? "#ddf5af" : "#feb38a", paddingLeft: "6px", letterSpacing: "0.3px" }}
                 >
                   {prereq.met ? (
                     <Check size={10} strokeWidth={3} />
