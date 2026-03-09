@@ -229,12 +229,12 @@ export function CourseInfoView() {
                         {course.semesters.map((s) => SEMESTER_LABELS[s]).join(" & ")}
                       </span>
                       {course.requiredForMajors.length > 0 && (
-                        <span className="inline-flex items-center rounded-full border border-zinc-900 px-1.5 py-0.5 text-[10px] font-semibold text-zinc-900">
+                        <span className="inline-flex items-center rounded-full border border-zinc-900 px-2 py-0.5 text-[10px] font-bold tracking-wider text-zinc-900">
                           Required
                         </span>
                       )}
                       {course.noCredit && (
-                        <span className="inline-flex items-center rounded-full border border-zinc-900 px-2 py-0.5 text-[10px] font-semibold text-zinc-900">
+                        <span className="inline-flex items-center rounded-full border border-zinc-900 px-2 py-0.5 text-[10px] font-bold tracking-wider text-zinc-900">
                           No Credit
                         </span>
                       )}

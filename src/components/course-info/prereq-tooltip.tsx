@@ -59,12 +59,8 @@ export function PrereqTooltip({ courseCode, onGoToCourse }: PrereqTooltipProps) 
               group.options.map((prereq) => (
                 <span
                   key={prereq.code}
-                  className={`inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-semibold ${
-                    prereq.met
-                      ? "text-zinc-900"
-                      : "border border-orange-200 bg-orange-50 text-orange-700"
-                  }`}
-                  style={prereq.met ? { backgroundColor: "#ddf5af" } : undefined}
+                  className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-semibold text-zinc-900"
+                  style={{ backgroundColor: prereq.met ? "#ddf5af" : "#f9c9a3", paddingLeft: "6px", letterSpacing: "0.3px" }}
                 >
                   {prereq.met ? (
                     <Check size={10} strokeWidth={3} />
@@ -72,7 +68,7 @@ export function PrereqTooltip({ courseCode, onGoToCourse }: PrereqTooltipProps) 
                     <X size={10} strokeWidth={3} />
                   )}
                   {prereq.code}
-                  {!prereq.met && <Info size={10} className="ml-0.5 text-orange-400" />}
+                  {!prereq.met && <Info size={10} className="ml-0.5" />}
                 </span>
               ))
             )}

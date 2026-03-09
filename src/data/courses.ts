@@ -819,7 +819,7 @@ export const courses: Course[] = [
     fullDescription:
       "Design and analysis of data structures and algorithms. Topics include lists, stacks, queues, trees, graphs, hashing, sorting algorithms, and analysis of time and space complexity. Students implement data structures in Java, analyze algorithm performance using Big-O notation, and solve problems requiring selection of appropriate data structures and algorithmic strategies.",
     semesters: [Semester.FALL, Semester.WINTER],
-    enrollmentStatus: EnrollmentStatus.ENROLLED,
+    enrollmentStatus: EnrollmentStatus.NOT_ENROLLED,
     classTypes: [ClassType.LECTURE, ClassType.LAB],
     requiredForMajors: [Major.COMPUTER_SCIENCE, Major.SOFTWARE_ENGINEERING],
     noCredit: false,
@@ -828,9 +828,9 @@ export const courses: Course[] = [
       {
         id: "cpsc-319-lec-01",
         code: "LEC 01",
-        enrolled: 130,
+        enrolled: 145,
         capacity: 150,
-        waitlistCount: 0,
+        waitlistCount: 6,
         waitlistCapacity: 20,
         timeSlot: {
           days: [DayOfWeek.MON, DayOfWeek.WED, DayOfWeek.FRI],
@@ -841,6 +841,14 @@ export const courses: Course[] = [
         rating: 4.1,
         rateMyProfUrl: "https://www.ratemyprofessors.com/professor/234581",
         location: "ST 140",
+        reservedSeating: [
+          {
+            majors: [Major.COMPUTER_SCIENCE, Major.SOFTWARE_ENGINEERING],
+            reservedCapacity: 110,
+            startDate: "2025-06-01",
+            endDate: "2025-06-30",
+          },
+        ],
         tutorials: [
           {
             id: "cpsc-319-t01",
@@ -849,6 +857,69 @@ export const courses: Course[] = [
               days: [DayOfWeek.TUE],
               startTime: "13:00",
               endTime: "13:50",
+            },
+          },
+          {
+            id: "cpsc-319-t02",
+            code: "TUT 02",
+            timeSlot: {
+              days: [DayOfWeek.THU],
+              startTime: "13:00",
+              endTime: "13:50",
+            },
+          },
+          {
+            id: "cpsc-319-t03",
+            code: "TUT 03",
+            timeSlot: {
+              days: [DayOfWeek.FRI],
+              startTime: "14:00",
+              endTime: "14:50",
+            },
+          },
+        ],
+      },
+      {
+        id: "cpsc-319-lec-02",
+        code: "LEC 02",
+        enrolled: 100,
+        capacity: 150,
+        waitlistCount: 0,
+        waitlistCapacity: 20,
+        timeSlot: {
+          days: [DayOfWeek.TUE, DayOfWeek.THU],
+          startTime: "14:00",
+          endTime: "15:15",
+        },
+        professor: "Dr. Ben Stephenson",
+        rating: 4.4,
+        rateMyProfUrl: "https://www.ratemyprofessors.com/professor/198234",
+        location: "ICT 114",
+        reservedSeating: [
+          {
+            majors: [Major.COMPUTER_SCIENCE, Major.SOFTWARE_ENGINEERING],
+            reservedCapacity: 110,
+            startDate: "2025-06-01",
+            endDate: "2025-06-30",
+          },
+        ],
+        tutorials: [
+          {
+            id: "cpsc-319-t04",
+            code: "TUT 04",
+            timeSlot: {
+              days: [DayOfWeek.WED],
+              startTime: "15:00",
+              endTime: "15:50",
+            },
+          },
+          {
+            id: "cpsc-319-t05",
+            code: "TUT 05",
+            timeSlot: {
+              days: [DayOfWeek.FRI],
+              startTime: "15:00",
+              endTime: "15:50",
             },
           },
         ],
@@ -875,9 +946,9 @@ export const courses: Course[] = [
       {
         id: "cpsc-325-lec-01",
         code: "LEC 01",
-        enrolled: 95,
+        enrolled: 115,
         capacity: 120,
-        waitlistCount: 3,
+        waitlistCount: 7,
         waitlistCapacity: 15,
         timeSlot: {
           days: [DayOfWeek.TUE, DayOfWeek.THU],
@@ -888,6 +959,14 @@ export const courses: Course[] = [
         rating: 3.9,
         rateMyProfUrl: "https://www.ratemyprofessors.com/professor/178432",
         location: "ICT 122",
+        reservedSeating: [
+          {
+            majors: [Major.COMPUTER_SCIENCE],
+            reservedCapacity: 90,
+            startDate: "2025-06-01",
+            endDate: "2025-06-30",
+          },
+        ],
         tutorials: [
           {
             id: "cpsc-325-t01",
@@ -896,6 +975,60 @@ export const courses: Course[] = [
               days: [DayOfWeek.FRI],
               startTime: "11:00",
               endTime: "11:50",
+            },
+          },
+          {
+            id: "cpsc-325-t02",
+            code: "TUT 02",
+            timeSlot: {
+              days: [DayOfWeek.FRI],
+              startTime: "12:00",
+              endTime: "12:50",
+            },
+          },
+        ],
+      },
+      {
+        id: "cpsc-325-lec-02",
+        code: "LEC 02",
+        enrolled: 78,
+        capacity: 120,
+        waitlistCount: 0,
+        waitlistCapacity: 15,
+        timeSlot: {
+          days: [DayOfWeek.MON, DayOfWeek.WED, DayOfWeek.FRI],
+          startTime: "13:00",
+          endTime: "13:50",
+        },
+        professor: "Dr. Philipp Woelfel",
+        rating: 4.2,
+        rateMyProfUrl: "https://www.ratemyprofessors.com/professor/192384",
+        location: "ST 135",
+        reservedSeating: [
+          {
+            majors: [Major.COMPUTER_SCIENCE],
+            reservedCapacity: 90,
+            startDate: "2025-06-01",
+            endDate: "2025-06-30",
+          },
+        ],
+        tutorials: [
+          {
+            id: "cpsc-325-t03",
+            code: "TUT 03",
+            timeSlot: {
+              days: [DayOfWeek.TUE],
+              startTime: "14:00",
+              endTime: "14:50",
+            },
+          },
+          {
+            id: "cpsc-325-t04",
+            code: "TUT 04",
+            timeSlot: {
+              days: [DayOfWeek.THU],
+              startTime: "14:00",
+              endTime: "14:50",
             },
           },
         ],
@@ -911,7 +1044,7 @@ export const courses: Course[] = [
     fullDescription:
       "Continuation of data structures and algorithms. Topics include balanced search trees, priority queues, graph algorithms, algorithm design paradigms including greedy algorithms, divide and conquer, dynamic programming, and an introduction to computational complexity. Students implement projects in Java and analyze algorithm efficiency through both theoretical and empirical methods.",
     semesters: [Semester.FALL, Semester.WINTER],
-    enrollmentStatus: EnrollmentStatus.ENROLLED,
+    enrollmentStatus: EnrollmentStatus.NOT_ENROLLED,
     classTypes: [ClassType.LECTURE],
     requiredForMajors: [Major.COMPUTER_SCIENCE, Major.SOFTWARE_ENGINEERING],
     noCredit: false,
@@ -922,9 +1055,9 @@ export const courses: Course[] = [
       {
         id: "cpsc-331-lec-01",
         code: "LEC 01",
-        enrolled: 110,
+        enrolled: 125,
         capacity: 130,
-        waitlistCount: 0,
+        waitlistCount: 4,
         waitlistCapacity: 20,
         timeSlot: {
           days: [DayOfWeek.MON, DayOfWeek.WED, DayOfWeek.FRI],
@@ -935,14 +1068,68 @@ export const courses: Course[] = [
         rating: 3.8,
         rateMyProfUrl: "https://www.ratemyprofessors.com/professor/165723",
         location: "ST 135",
+        reservedSeating: [
+          {
+            majors: [Major.COMPUTER_SCIENCE, Major.SOFTWARE_ENGINEERING],
+            reservedCapacity: 100,
+            startDate: "2025-06-01",
+            endDate: "2025-07-15",
+          },
+        ],
         tutorials: [
           {
             id: "cpsc-331-t01",
             code: "TUT 01",
             timeSlot: {
+              days: [DayOfWeek.TUE],
+              startTime: "15:00",
+              endTime: "15:50",
+            },
+          },
+          {
+            id: "cpsc-331-t02",
+            code: "TUT 02",
+            timeSlot: {
               days: [DayOfWeek.THU],
-              startTime: "13:00",
-              endTime: "13:50",
+              startTime: "15:00",
+              endTime: "15:50",
+            },
+          },
+        ],
+      },
+      {
+        id: "cpsc-331-lec-02",
+        code: "LEC 02",
+        enrolled: 90,
+        capacity: 130,
+        waitlistCount: 0,
+        waitlistCapacity: 20,
+        timeSlot: {
+          days: [DayOfWeek.TUE, DayOfWeek.THU],
+          startTime: "09:30",
+          endTime: "10:45",
+        },
+        professor: "Dr. Mohammad Moshirpour",
+        rating: 4.0,
+        rateMyProfUrl: "https://www.ratemyprofessors.com/professor/213847",
+        location: "ICT 122",
+        tutorials: [
+          {
+            id: "cpsc-331-t03",
+            code: "TUT 03",
+            timeSlot: {
+              days: [DayOfWeek.WED],
+              startTime: "11:00",
+              endTime: "11:50",
+            },
+          },
+          {
+            id: "cpsc-331-t04",
+            code: "TUT 04",
+            timeSlot: {
+              days: [DayOfWeek.FRI],
+              startTime: "11:00",
+              endTime: "11:50",
             },
           },
         ],
@@ -958,7 +1145,7 @@ export const courses: Course[] = [
     fullDescription:
       "An introduction to formal logic. Topics include propositional logic, truth tables, natural deduction proofs, predicate logic with quantifiers, translations between English and formal languages, and semantic methods including truth trees. Students develop skills in rigorous argumentation, identifying fallacies, and constructing formal proofs applicable to mathematics, computer science, and philosophy.",
     semesters: [Semester.FALL, Semester.WINTER],
-    enrollmentStatus: EnrollmentStatus.ENROLLED,
+    enrollmentStatus: EnrollmentStatus.NOT_ENROLLED,
     classTypes: [ClassType.LECTURE],
     requiredForMajors: [Major.PHILOSOPHY, Major.COMPUTER_SCIENCE],
     noCredit: false,
@@ -967,9 +1154,9 @@ export const courses: Course[] = [
       {
         id: "phil-279-lec-01",
         code: "LEC 01",
-        enrolled: 140,
+        enrolled: 190,
         capacity: 200,
-        waitlistCount: 0,
+        waitlistCount: 10,
         waitlistCapacity: 25,
         timeSlot: {
           days: [DayOfWeek.TUE, DayOfWeek.THU],
@@ -980,6 +1167,14 @@ export const courses: Course[] = [
         rating: 4.3,
         rateMyProfUrl: "https://www.ratemyprofessors.com/professor/192847",
         location: "ST 147",
+        reservedSeating: [
+          {
+            majors: [Major.COMPUTER_SCIENCE, Major.PHILOSOPHY],
+            reservedCapacity: 150,
+            startDate: "2025-06-01",
+            endDate: "2025-06-30",
+          },
+        ],
         tutorials: [
           {
             id: "phil-279-t01",
@@ -988,6 +1183,61 @@ export const courses: Course[] = [
               days: [DayOfWeek.WED],
               startTime: "12:00",
               endTime: "12:50",
+            },
+          },
+          {
+            id: "phil-279-t02",
+            code: "TUT 02",
+            timeSlot: {
+              days: [DayOfWeek.FRI],
+              startTime: "12:00",
+              endTime: "12:50",
+            },
+          },
+          {
+            id: "phil-279-t03",
+            code: "TUT 03",
+            timeSlot: {
+              days: [DayOfWeek.WED],
+              startTime: "14:00",
+              endTime: "14:50",
+            },
+          },
+        ],
+      },
+      {
+        id: "phil-279-lec-02",
+        code: "LEC 02",
+        enrolled: 120,
+        capacity: 150,
+        waitlistCount: 0,
+        waitlistCapacity: 20,
+        timeSlot: {
+          days: [DayOfWeek.MON, DayOfWeek.WED, DayOfWeek.FRI],
+          startTime: "11:00",
+          endTime: "11:50",
+        },
+        professor: "Dr. Jack Frey",
+        rating: 3.9,
+        rateMyProfUrl: "https://www.ratemyprofessors.com/professor/218493",
+        location: "SS 105",
+        tutorials: [
+          {
+            id: "phil-279-t04",
+            code: "TUT 04",
+            timeSlot: {
+              days: [DayOfWeek.TUE],
+              startTime: "14:00",
+              endTime: "14:50",
+            },
+          },
+          {
+            id: "phil-279-t05",
+            code: "TUT 05",
+            timeSlot: {
+              days: [DayOfWeek.THU],
+              startTime: "14:00",
+              endTime: "14:50",
             },
           },
         ],
@@ -1014,9 +1264,9 @@ export const courses: Course[] = [
       {
         id: "phil-377-lec-01",
         code: "LEC 01",
-        enrolled: 25,
+        enrolled: 35,
         capacity: 40,
-        waitlistCount: 0,
+        waitlistCount: 3,
         waitlistCapacity: 10,
         timeSlot: {
           days: [DayOfWeek.MON, DayOfWeek.WED, DayOfWeek.FRI],
@@ -1027,7 +1277,26 @@ export const courses: Course[] = [
         rating: 4.6,
         rateMyProfUrl: "https://www.ratemyprofessors.com/professor/187293",
         location: "SS 213",
-        tutorials: [],
+        tutorials: [
+          {
+            id: "phil-377-t01",
+            code: "TUT 01",
+            timeSlot: {
+              days: [DayOfWeek.TUE],
+              startTime: "12:00",
+              endTime: "12:50",
+            },
+          },
+          {
+            id: "phil-377-t02",
+            code: "TUT 02",
+            timeSlot: {
+              days: [DayOfWeek.THU],
+              startTime: "12:00",
+              endTime: "12:50",
+            },
+          },
+        ],
       },
     ],
   },
@@ -1040,7 +1309,7 @@ export const courses: Course[] = [
     fullDescription:
       "Foundations of discrete mathematics. Topics include propositional and predicate logic, sets, relations, functions, mathematical induction, combinatorics, graph theory, and trees. Students develop skills in constructing rigorous mathematical proofs and apply discrete structures to problems in computer science and mathematics.",
     semesters: [Semester.FALL, Semester.WINTER],
-    enrollmentStatus: EnrollmentStatus.ENROLLED,
+    enrollmentStatus: EnrollmentStatus.NOT_ENROLLED,
     classTypes: [ClassType.LECTURE],
     requiredForMajors: [Major.COMPUTER_SCIENCE, Major.MATHEMATICS],
     noCredit: false,
@@ -1049,9 +1318,9 @@ export const courses: Course[] = [
       {
         id: "math-271-lec-01",
         code: "LEC 01",
-        enrolled: 160,
+        enrolled: 195,
         capacity: 200,
-        waitlistCount: 0,
+        waitlistCount: 12,
         waitlistCapacity: 25,
         timeSlot: {
           days: [DayOfWeek.MON, DayOfWeek.WED, DayOfWeek.FRI],
@@ -1062,6 +1331,14 @@ export const courses: Course[] = [
         rating: 4.0,
         rateMyProfUrl: "https://www.ratemyprofessors.com/professor/203948",
         location: "ST 140",
+        reservedSeating: [
+          {
+            majors: [Major.COMPUTER_SCIENCE, Major.MATHEMATICS],
+            reservedCapacity: 150,
+            startDate: "2025-06-01",
+            endDate: "2025-06-30",
+          },
+        ],
         tutorials: [
           {
             id: "math-271-t01",
@@ -1070,6 +1347,61 @@ export const courses: Course[] = [
               days: [DayOfWeek.TUE],
               startTime: "10:00",
               endTime: "10:50",
+            },
+          },
+          {
+            id: "math-271-t02",
+            code: "TUT 02",
+            timeSlot: {
+              days: [DayOfWeek.THU],
+              startTime: "10:00",
+              endTime: "10:50",
+            },
+          },
+          {
+            id: "math-271-t03",
+            code: "TUT 03",
+            timeSlot: {
+              days: [DayOfWeek.FRI],
+              startTime: "14:00",
+              endTime: "14:50",
+            },
+          },
+        ],
+      },
+      {
+        id: "math-271-lec-02",
+        code: "LEC 02",
+        enrolled: 140,
+        capacity: 200,
+        waitlistCount: 0,
+        waitlistCapacity: 25,
+        timeSlot: {
+          days: [DayOfWeek.TUE, DayOfWeek.THU],
+          startTime: "14:00",
+          endTime: "15:15",
+        },
+        professor: "Dr. Clifton Cunningham",
+        rating: 4.3,
+        rateMyProfUrl: "https://www.ratemyprofessors.com/professor/187432",
+        location: "ST 147",
+        tutorials: [
+          {
+            id: "math-271-t04",
+            code: "TUT 04",
+            timeSlot: {
+              days: [DayOfWeek.WED],
+              startTime: "15:00",
+              endTime: "15:50",
+            },
+          },
+          {
+            id: "math-271-t05",
+            code: "TUT 05",
+            timeSlot: {
+              days: [DayOfWeek.FRI],
+              startTime: "15:00",
+              endTime: "15:50",
             },
           },
         ],
@@ -1094,9 +1426,9 @@ export const courses: Course[] = [
       {
         id: "math-273-lec-01",
         code: "LEC 01",
-        enrolled: 80,
+        enrolled: 90,
         capacity: 100,
-        waitlistCount: 0,
+        waitlistCount: 5,
         waitlistCapacity: 15,
         timeSlot: {
           days: [DayOfWeek.TUE, DayOfWeek.THU],
@@ -1107,7 +1439,54 @@ export const courses: Course[] = [
         rating: 3.7,
         rateMyProfUrl: "https://www.ratemyprofessors.com/professor/218472",
         location: "MS 211",
-        tutorials: [],
+        tutorials: [
+          {
+            id: "math-273-t01",
+            code: "TUT 01",
+            timeSlot: {
+              days: [DayOfWeek.WED],
+              startTime: "10:00",
+              endTime: "10:50",
+            },
+          },
+          {
+            id: "math-273-t02",
+            code: "TUT 02",
+            timeSlot: {
+              days: [DayOfWeek.FRI],
+              startTime: "10:00",
+              endTime: "10:50",
+            },
+          },
+        ],
+      },
+      {
+        id: "math-273-lec-02",
+        code: "LEC 02",
+        enrolled: 65,
+        capacity: 100,
+        waitlistCount: 0,
+        waitlistCapacity: 15,
+        timeSlot: {
+          days: [DayOfWeek.MON, DayOfWeek.WED, DayOfWeek.FRI],
+          startTime: "12:00",
+          endTime: "12:50",
+        },
+        professor: "Dr. Kristine Bauer",
+        rating: 4.1,
+        rateMyProfUrl: "https://www.ratemyprofessors.com/professor/234192",
+        location: "MS 325",
+        tutorials: [
+          {
+            id: "math-273-t03",
+            code: "TUT 03",
+            timeSlot: {
+              days: [DayOfWeek.TUE],
+              startTime: "13:00",
+              endTime: "13:50",
+            },
+          },
+        ],
       },
     ],
   },
@@ -1120,7 +1499,7 @@ export const courses: Course[] = [
     fullDescription:
       "Techniques of integration, improper integrals, sequences and series, convergence tests, power series, Taylor and Maclaurin series, parametric equations, and polar coordinates. Applications include arc length, surface area, and modeling with differential equations. Students develop fluency in analytical and computational methods for single-variable calculus.",
     semesters: [Semester.FALL, Semester.WINTER, Semester.SPRING],
-    enrollmentStatus: EnrollmentStatus.ENROLLED,
+    enrollmentStatus: EnrollmentStatus.NOT_ENROLLED,
     classTypes: [ClassType.LECTURE],
     requiredForMajors: [Major.MATHEMATICS, Major.SOFTWARE_ENGINEERING, Major.ELECTRICAL_ENGINEERING],
     noCredit: false,
@@ -1129,9 +1508,9 @@ export const courses: Course[] = [
       {
         id: "math-267-lec-01",
         code: "LEC 01",
-        enrolled: 180,
+        enrolled: 195,
         capacity: 200,
-        waitlistCount: 0,
+        waitlistCount: 8,
         waitlistCapacity: 25,
         timeSlot: {
           days: [DayOfWeek.MON, DayOfWeek.WED, DayOfWeek.FRI],
@@ -1142,12 +1521,75 @@ export const courses: Course[] = [
         rating: 4.2,
         rateMyProfUrl: "https://www.ratemyprofessors.com/professor/247193",
         location: "ST 147",
+        reservedSeating: [
+          {
+            majors: [Major.SOFTWARE_ENGINEERING, Major.ELECTRICAL_ENGINEERING, Major.MECHANICAL_ENGINEERING],
+            reservedCapacity: 140,
+            startDate: "2025-06-01",
+            endDate: "2025-07-01",
+          },
+        ],
         tutorials: [
           {
             id: "math-267-t01",
             code: "TUT 01",
             timeSlot: {
+              days: [DayOfWeek.TUE],
+              startTime: "09:00",
+              endTime: "09:50",
+            },
+          },
+          {
+            id: "math-267-t02",
+            code: "TUT 02",
+            timeSlot: {
               days: [DayOfWeek.THU],
+              startTime: "09:00",
+              endTime: "09:50",
+            },
+          },
+          {
+            id: "math-267-t03",
+            code: "TUT 03",
+            timeSlot: {
+              days: [DayOfWeek.FRI],
+              startTime: "13:00",
+              endTime: "13:50",
+            },
+          },
+        ],
+      },
+      {
+        id: "math-267-lec-02",
+        code: "LEC 02",
+        enrolled: 160,
+        capacity: 200,
+        waitlistCount: 0,
+        waitlistCapacity: 25,
+        timeSlot: {
+          days: [DayOfWeek.TUE, DayOfWeek.THU],
+          startTime: "11:00",
+          endTime: "12:15",
+        },
+        professor: "Dr. Alex Brudnyi",
+        rating: 3.6,
+        rateMyProfUrl: "https://www.ratemyprofessors.com/professor/176284",
+        location: "ST 140",
+        tutorials: [
+          {
+            id: "math-267-t04",
+            code: "TUT 04",
+            timeSlot: {
+              days: [DayOfWeek.WED],
+              startTime: "13:00",
+              endTime: "13:50",
+            },
+          },
+          {
+            id: "math-267-t05",
+            code: "TUT 05",
+            timeSlot: {
+              days: [DayOfWeek.FRI],
               startTime: "09:00",
               endTime: "09:50",
             },
@@ -1165,7 +1607,7 @@ export const courses: Course[] = [
     fullDescription:
       "Systems of linear equations, matrices, determinants, vectors in Euclidean n-space, dot and cross products, lines and planes, introduction to vector spaces, linear transformations, eigenvalues and eigenvectors, and applications. Students solve applied problems using matrix methods and develop geometric intuition for linear algebraic concepts.",
     semesters: [Semester.FALL, Semester.WINTER, Semester.SPRING],
-    enrollmentStatus: EnrollmentStatus.ENROLLED,
+    enrollmentStatus: EnrollmentStatus.NOT_ENROLLED,
     classTypes: [ClassType.LECTURE],
     requiredForMajors: [Major.MATHEMATICS, Major.COMPUTER_SCIENCE, Major.DATA_SCIENCE],
     noCredit: false,
@@ -1174,9 +1616,9 @@ export const courses: Course[] = [
       {
         id: "math-211-lec-01",
         code: "LEC 01",
-        enrolled: 175,
+        enrolled: 200,
         capacity: 200,
-        waitlistCount: 0,
+        waitlistCount: 15,
         waitlistCapacity: 25,
         timeSlot: {
           days: [DayOfWeek.MON, DayOfWeek.WED, DayOfWeek.FRI],
@@ -1187,6 +1629,14 @@ export const courses: Course[] = [
         rating: 3.6,
         rateMyProfUrl: "https://www.ratemyprofessors.com/professor/176284",
         location: "ST 135",
+        reservedSeating: [
+          {
+            majors: [Major.MATHEMATICS, Major.COMPUTER_SCIENCE, Major.DATA_SCIENCE],
+            reservedCapacity: 140,
+            startDate: "2025-06-01",
+            endDate: "2025-06-30",
+          },
+        ],
         tutorials: [
           {
             id: "math-211-t01",
@@ -1195,6 +1645,61 @@ export const courses: Course[] = [
               days: [DayOfWeek.TUE],
               startTime: "16:00",
               endTime: "16:50",
+            },
+          },
+          {
+            id: "math-211-t02",
+            code: "TUT 02",
+            timeSlot: {
+              days: [DayOfWeek.THU],
+              startTime: "16:00",
+              endTime: "16:50",
+            },
+          },
+          {
+            id: "math-211-t03",
+            code: "TUT 03",
+            timeSlot: {
+              days: [DayOfWeek.FRI],
+              startTime: "16:00",
+              endTime: "16:50",
+            },
+          },
+        ],
+      },
+      {
+        id: "math-211-lec-02",
+        code: "LEC 02",
+        enrolled: 155,
+        capacity: 200,
+        waitlistCount: 0,
+        waitlistCapacity: 25,
+        timeSlot: {
+          days: [DayOfWeek.TUE, DayOfWeek.THU],
+          startTime: "15:30",
+          endTime: "16:45",
+        },
+        professor: "Dr. Gilad Lerman",
+        rating: 4.4,
+        rateMyProfUrl: "https://www.ratemyprofessors.com/professor/201384",
+        location: "ST 147",
+        tutorials: [
+          {
+            id: "math-211-t04",
+            code: "TUT 04",
+            timeSlot: {
+              days: [DayOfWeek.MON],
+              startTime: "13:00",
+              endTime: "13:50",
+            },
+          },
+          {
+            id: "math-211-t05",
+            code: "TUT 05",
+            timeSlot: {
+              days: [DayOfWeek.WED],
+              startTime: "13:00",
+              endTime: "13:50",
             },
           },
         ],
@@ -1210,7 +1715,7 @@ export const courses: Course[] = [
     fullDescription:
       "An introduction to the discipline of sociology. Topics include social structure, culture, socialization, deviance, social stratification, race and ethnicity, gender, family, education, religion, and social change. Students learn to apply the sociological imagination to everyday life and develop critical thinking about social institutions and inequalities.",
     semesters: [Semester.FALL, Semester.WINTER, Semester.SPRING],
-    enrollmentStatus: EnrollmentStatus.ENROLLED,
+    enrollmentStatus: EnrollmentStatus.NOT_ENROLLED,
     classTypes: [ClassType.LECTURE],
     requiredForMajors: [Major.SOCIOLOGY],
     noCredit: false,
@@ -1219,9 +1724,9 @@ export const courses: Course[] = [
       {
         id: "soci-201-lec-01",
         code: "LEC 01",
-        enrolled: 250,
+        enrolled: 280,
         capacity: 300,
-        waitlistCount: 0,
+        waitlistCount: 10,
         waitlistCapacity: 30,
         timeSlot: {
           days: [DayOfWeek.TUE, DayOfWeek.THU],
@@ -1237,9 +1742,64 @@ export const courses: Course[] = [
             id: "soci-201-t01",
             code: "TUT 01",
             timeSlot: {
+              days: [DayOfWeek.WED],
+              startTime: "10:00",
+              endTime: "10:50",
+            },
+          },
+          {
+            id: "soci-201-t02",
+            code: "TUT 02",
+            timeSlot: {
+              days: [DayOfWeek.FRI],
+              startTime: "10:00",
+              endTime: "10:50",
+            },
+          },
+          {
+            id: "soci-201-t03",
+            code: "TUT 03",
+            timeSlot: {
               days: [DayOfWeek.FRI],
               startTime: "13:00",
               endTime: "13:50",
+            },
+          },
+        ],
+      },
+      {
+        id: "soci-201-lec-02",
+        code: "LEC 02",
+        enrolled: 200,
+        capacity: 300,
+        waitlistCount: 0,
+        waitlistCapacity: 30,
+        timeSlot: {
+          days: [DayOfWeek.MON, DayOfWeek.WED, DayOfWeek.FRI],
+          startTime: "10:00",
+          endTime: "10:50",
+        },
+        professor: "Dr. Ariel Ducey",
+        rating: 4.5,
+        rateMyProfUrl: "https://www.ratemyprofessors.com/professor/218472",
+        location: "SS 105",
+        tutorials: [
+          {
+            id: "soci-201-t04",
+            code: "TUT 04",
+            timeSlot: {
+              days: [DayOfWeek.TUE],
+              startTime: "11:00",
+              endTime: "11:50",
+            },
+          },
+          {
+            id: "soci-201-t05",
+            code: "TUT 05",
+            timeSlot: {
+              days: [DayOfWeek.THU],
+              startTime: "11:00",
+              endTime: "11:50",
             },
           },
         ],
@@ -1264,9 +1824,9 @@ export const courses: Course[] = [
       {
         id: "soci-203-lec-01",
         code: "LEC 01",
-        enrolled: 120,
+        enrolled: 135,
         capacity: 150,
-        waitlistCount: 0,
+        waitlistCount: 4,
         waitlistCapacity: 20,
         timeSlot: {
           days: [DayOfWeek.MON, DayOfWeek.WED],
@@ -1277,7 +1837,54 @@ export const courses: Course[] = [
         rating: 4.4,
         rateMyProfUrl: "https://www.ratemyprofessors.com/professor/213847",
         location: "SS 105",
-        tutorials: [],
+        tutorials: [
+          {
+            id: "soci-203-t01",
+            code: "TUT 01",
+            timeSlot: {
+              days: [DayOfWeek.TUE],
+              startTime: "10:00",
+              endTime: "10:50",
+            },
+          },
+          {
+            id: "soci-203-t02",
+            code: "TUT 02",
+            timeSlot: {
+              days: [DayOfWeek.THU],
+              startTime: "10:00",
+              endTime: "10:50",
+            },
+          },
+        ],
+      },
+      {
+        id: "soci-203-lec-02",
+        code: "LEC 02",
+        enrolled: 95,
+        capacity: 150,
+        waitlistCount: 0,
+        waitlistCapacity: 20,
+        timeSlot: {
+          days: [DayOfWeek.TUE, DayOfWeek.THU],
+          startTime: "09:30",
+          endTime: "10:45",
+        },
+        professor: "Dr. Tom Langford",
+        rating: 3.8,
+        rateMyProfUrl: "https://www.ratemyprofessors.com/professor/198273",
+        location: "SS 213",
+        tutorials: [
+          {
+            id: "soci-203-t03",
+            code: "TUT 03",
+            timeSlot: {
+              days: [DayOfWeek.FRI],
+              startTime: "11:00",
+              endTime: "11:50",
+            },
+          },
+        ],
       },
     ],
   },
@@ -1297,9 +1904,9 @@ export const courses: Course[] = [
     prerequisites: [],
     sections: [
       {
-        id: "engl-251-lec-01",
+        id: "engl-251-sem-01",
         code: "SEM 01",
-        enrolled: 22,
+        enrolled: 25,
         capacity: 25,
         waitlistCount: 5,
         waitlistCapacity: 5,
@@ -1311,6 +1918,42 @@ export const courses: Course[] = [
         professor: "Dr. Derek Beaulieu",
         rating: 4.5,
         rateMyProfUrl: "https://www.ratemyprofessors.com/professor/225183",
+        location: "CHC 119",
+        tutorials: [],
+      },
+      {
+        id: "engl-251-sem-02",
+        code: "SEM 02",
+        enrolled: 20,
+        capacity: 25,
+        waitlistCount: 3,
+        waitlistCapacity: 5,
+        timeSlot: {
+          days: [DayOfWeek.TUE, DayOfWeek.THU],
+          startTime: "14:00",
+          endTime: "15:15",
+        },
+        professor: "Dr. Suzette Mayr",
+        rating: 4.9,
+        rateMyProfUrl: "https://www.ratemyprofessors.com/professor/198472",
+        location: "CHC 201",
+        tutorials: [],
+      },
+      {
+        id: "engl-251-sem-03",
+        code: "SEM 03",
+        enrolled: 18,
+        capacity: 25,
+        waitlistCount: 0,
+        waitlistCapacity: 5,
+        timeSlot: {
+          days: [DayOfWeek.MON, DayOfWeek.WED],
+          startTime: "14:00",
+          endTime: "15:15",
+        },
+        professor: "Dr. Thomas Wharton",
+        rating: 4.2,
+        rateMyProfUrl: "https://www.ratemyprofessors.com/professor/231094",
         location: "CHC 119",
         tutorials: [],
       },
