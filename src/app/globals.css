@@ -90,7 +90,7 @@ body {
 }
 
 .animate-crossfade-in {
-  animation: crossfade-in 250ms ease-out forwards;
+  animation: crossfade-in 130ms ease-out forwards;
 }
 
 @keyframes crossfade-out {
@@ -99,7 +99,7 @@ body {
 }
 
 .animate-crossfade-out {
-  animation: crossfade-out 250ms ease-in forwards;
+  animation: crossfade-out 130ms ease-in forwards;
 }
 
 @keyframes cart-item-in {

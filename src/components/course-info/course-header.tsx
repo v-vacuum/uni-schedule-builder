@@ -23,7 +23,6 @@ interface CourseHeaderProps {
 
 export function CourseTopBar({ course }: CourseHeaderProps) {
   const { clearSelection } = useScheduler();
-  const enrollment = ENROLLMENT_COLORS[course.enrollmentStatus];
 
   return (
     <div className="flex h-11 shrink-0 items-center gap-2.5 border-b border-zinc-300 px-4">
@@ -35,6 +34,16 @@ export function CourseTopBar({ course }: CourseHeaderProps) {
         <ArrowLeft size={16} />
       </button>
       <div className="flex-1" />
+      <CourseTopBarPills course={course} />
+    </div>
+  );
+}
+
+export function CourseTopBarPills({ course }: CourseHeaderProps) {
+  const enrollment = ENROLLMENT_COLORS[course.enrollmentStatus];
+
+  return (
+    <>
       <span className="inline-flex items-center rounded-full bg-zinc-900 px-2.5 py-1 text-[11px] font-bold tracking-wider text-white">
         {course.semesters.map((s) => SEMESTER_LABELS[s]).join(", ")}
       </span>
@@ -46,7 +55,24 @@ export function CourseTopBar({ course }: CourseHeaderProps) {
           {enrollment.label}
         </span>
       )}
-    </div>
+    </>
+  );
+}
+
+export function CourseTopBarFrame() {
+  const { clearSelection } = useScheduler();
+
+  return (
+    <>
+      <button
+        onClick={clearSelection}
+        aria-label="Back to course list"
+        className="flex shrink-0 items-center justify-center text-zinc-900 transition-colors hover:text-zinc-600 focus-visible:ring-2 focus-visible:ring-zinc-400 focus-visible:outline-none rounded"
+      >
+        <ArrowLeft size={16} />
+      </button>
+      <div className="flex-1" />
+    </>
   );
 }
 
