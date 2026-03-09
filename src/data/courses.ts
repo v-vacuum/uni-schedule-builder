@@ -820,7 +820,7 @@ export const courses: Course[] = [
       "Design and analysis of data structures and algorithms. Topics include lists, stacks, queues, trees, graphs, hashing, sorting algorithms, and analysis of time and space complexity. Students implement data structures in Java, analyze algorithm performance using Big-O notation, and solve problems requiring selection of appropriate data structures and algorithmic strategies.",
     semesters: [Semester.FALL, Semester.WINTER],
     enrollmentStatus: EnrollmentStatus.NOT_ENROLLED,
-    classTypes: [ClassType.LECTURE, ClassType.LAB],
+    classTypes: [ClassType.LECTURE],
     requiredForMajors: [Major.COMPUTER_SCIENCE, Major.SOFTWARE_ENGINEERING],
     noCredit: false,
     prerequisites: [],
@@ -936,7 +936,7 @@ export const courses: Course[] = [
       "Fundamentals of computer organization and architecture. Topics include instruction set architecture, datapath and control, pipelining, memory hierarchy design including caches and virtual memory, I/O systems, and introduction to multiprocessors. Students complete labs using assembly language and hardware simulation tools to deepen understanding of processor design trade-offs.",
     semesters: [Semester.FALL, Semester.WINTER],
     enrollmentStatus: EnrollmentStatus.NOT_ENROLLED,
-    classTypes: [ClassType.LECTURE, ClassType.LAB],
+    classTypes: [ClassType.LECTURE],
     requiredForMajors: [Major.COMPUTER_SCIENCE],
     noCredit: false,
     prerequisites: [
@@ -1735,7 +1735,7 @@ export const courses: Course[] = [
         },
         professor: "Dr. Gillian Stevens",
         rating: 4.0,
-        rateMyProfUrl: "https://www.ratemyprofessors.com/professor/201384",
+        rateMyProfUrl: "https://www.ratemyprofessors.com/professor/302841",
         location: "ST 140",
         tutorials: [
           {
@@ -1781,7 +1781,7 @@ export const courses: Course[] = [
         },
         professor: "Dr. Ariel Ducey",
         rating: 4.5,
-        rateMyProfUrl: "https://www.ratemyprofessors.com/professor/218472",
+        rateMyProfUrl: "https://www.ratemyprofessors.com/professor/294715",
         location: "SS 105",
         tutorials: [
           {
@@ -1835,7 +1835,7 @@ export const courses: Course[] = [
         },
         professor: "Dr. Fiona Nelson",
         rating: 4.4,
-        rateMyProfUrl: "https://www.ratemyprofessors.com/professor/213847",
+        rateMyProfUrl: "https://www.ratemyprofessors.com/professor/317294",
         location: "SS 105",
         tutorials: [
           {

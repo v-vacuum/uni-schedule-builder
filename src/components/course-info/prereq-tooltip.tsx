@@ -2,14 +2,8 @@
 
 import { Check, X, User, Info } from "lucide-react";
 import { courses } from "@/data/courses";
-import { EnrollmentStatus, Semester } from "@/types";
-
-const SEMESTER_LABELS: Record<Semester, string> = {
-  [Semester.FALL]: "Fall",
-  [Semester.WINTER]: "Winter",
-  [Semester.SPRING]: "Spring",
-  [Semester.SUMMER]: "Summer",
-};
+import { EnrollmentStatus } from "@/types";
+import { SEMESTER_LABELS } from "./course-header";
 
 const ENROLLMENT_LABEL: Record<EnrollmentStatus, string> = {
   [EnrollmentStatus.ENROLLED]: "Enrolled",
