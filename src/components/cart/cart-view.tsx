@@ -57,15 +57,15 @@ export function CartView() {
     });
     prevKeysRef.current = currentKeys;
 
-    // Transition entering → visible
+    // Transition entering → visible after animation completes
     if (entering.length > 0) {
-      requestAnimationFrame(() => {
+      setTimeout(() => {
         setAnimatedItems((prev) =>
           prev.map((ai) =>
             ai.state === "entering" ? { ...ai, state: "visible" } : ai
           )
         );
-      });
+      }, 120);
     }
 
     // Remove exiting items after animation
