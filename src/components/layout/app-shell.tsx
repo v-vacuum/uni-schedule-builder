@@ -27,7 +27,7 @@ export function AppShell() {
       {/* Desktop / tablet: side-by-side with horizontal scroll when needed */}
       <div className="hidden md:flex h-screen overflow-hidden">
         <Sidebar />
-        <div className="flex flex-1 overflow-x-auto">
+        <div className="flex flex-1 overflow-x-auto overflow-y-hidden">
           {/* Course info panel - collapses in checkout mode */}
           <div
             className="flex shrink-0 flex-col bg-zinc-50 overflow-hidden"
