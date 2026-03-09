@@ -44,18 +44,17 @@ export function CartItemCard({ item }: CartItemCardProps) {
       </button>
       <div className="min-w-0 flex-1 space-y-1">
         <div className="flex items-center gap-1.5">
-          <span className="text-sm font-bold text-zinc-900">{course.code}</span>
+          <span className="w-24 text-sm font-bold text-zinc-900">{course.code}</span>
           <button
             onClick={(e) => {
               e.stopPropagation();
               removeFromCart(item.courseId, item.sectionId);
             }}
             aria-label={`Remove ${course.code} from cart`}
-            className="flex h-5 w-5 items-center justify-center rounded text-zinc-400 opacity-0 transition-opacity hover:text-red-500 group-hover/card:opacity-100 focus-visible:opacity-100 focus-visible:ring-2 focus-visible:ring-zinc-400 focus-visible:outline-none"
+            className="flex h-5 w-5 shrink-0 items-center justify-center rounded text-zinc-400 opacity-0 transition-opacity hover:text-red-500 group-hover/card:opacity-100 focus-visible:opacity-100 focus-visible:ring-2 focus-visible:ring-zinc-400 focus-visible:outline-none"
           >
             <Trash2 size={13} />
           </button>
-          <div className="flex-1" />
           <span
             className="inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-semibold tracking-wider"
             style={{ backgroundColor: colors.bg, color: colors.text }}

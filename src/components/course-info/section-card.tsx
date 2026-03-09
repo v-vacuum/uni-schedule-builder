@@ -100,7 +100,7 @@ export function SectionCard({
                 </span>
                 {tooltipMounted && (
                   <div
-                    className={`absolute right-0 top-full z-50 mt-1 ${tooltipVisible ? "animate-tooltip-in" : "animate-tooltip-out"}`}
+                    className={`absolute right-0 top-full z-50 mt-1 text-left ${tooltipVisible ? "animate-tooltip-in" : "animate-tooltip-out"}`}
                     onAnimationEnd={handleTooltipAnimationEnd}
                   >
                     <ReservedSeatingTooltip
