@@ -5,7 +5,7 @@ import { ExternalLink, Info, MapPin, Star } from "lucide-react";
 import { TutorialRow } from "./tutorial-row";
 import { ReservedSeatingTooltip } from "./reserved-seating-tooltip";
 import { EnrollmentStatus, LectureSection } from "@/types";
-import { formatDays, formatTimeRange } from "@/lib/utils";
+import { expandLocation, formatDays, formatTimeRange } from "@/lib/utils";
 import { useScheduler } from "@/store/scheduler-context";
 
 interface SectionCardProps {
@@ -143,7 +143,7 @@ export function SectionCard({
           </div>
           <div className="flex items-center gap-1 text-zinc-500">
             <MapPin size={12} />
-            <span className="text-xs">{section.location}</span>
+            <span className="text-xs">{expandLocation(section.location)}</span>
           </div>
         </div>
       </div>
