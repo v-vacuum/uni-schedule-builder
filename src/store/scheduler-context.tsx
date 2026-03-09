@@ -235,8 +235,12 @@ interface SchedulerContextValue {
   calendarBlocks: CalendarBlock[];
   conflicts: ConflictInfo[];
   isCheckoutMode: boolean;
+  isSuccessMode: boolean;
+  getEffectiveEnrollmentStatus: (courseId: string) => EnrollmentStatus;
   enterCheckout: () => void;
   exitCheckout: () => void;
+  confirmEnrollment: () => void;
+  dismissSuccess: () => void;
   selectCourse: (courseId: string) => void;
   clearSelection: () => void;
   addToCart: (courseId: string, sectionId: string, tutorialId?: string) => void;
@@ -258,8 +262,26 @@ const SchedulerContext = createContext<SchedulerContextValue | null>(null);
 export function SchedulerProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [isCheckoutMode, setIsCheckoutMode] = useState(false);
+  const [isSuccessMode, setIsSuccessMode] = useState(false);
+  const [enrollmentOverrides, setEnrollmentOverrides] = useState<
+    Map<string, EnrollmentStatus>
+  >(new Map());
   const enterCheckout = useCallback(() => setIsCheckoutMode(true), []);
   const exitCheckout = useCallback(() => setIsCheckoutMode(false), []);
+  const dismissSuccess = useCallback(() => {
+    setIsSuccessMode(false);
+    setIsCheckoutMode(false);
+    setEnrollmentOverrides(new Map());
+  }, []);
+  const getEffectiveEnrollmentStatus = useCallback(
+    (courseId: string): EnrollmentStatus => {
+      const override = enrollmentOverrides.get(courseId);
+      if (override) return override;
+      const course = allCourses.find((c) => c.id === courseId);
+      return course?.enrollmentStatus ?? EnrollmentStatus.NOT_ENROLLED;
+    },
+    [enrollmentOverrides]
+  );
 
   const activeCart = useMemo(
     () => state.carts.find((c) => c.id === state.activeCartId) ?? state.carts[0],
@@ -319,6 +341,34 @@ export function SchedulerProvider({ children }: { children: ReactNode }) {
 
     return result;
   }, [activeCart.items]);
+
+  const confirmEnrollment = useCallback(() => {
+    setIsSuccessMode(true);
+    setEnrollmentOverrides((prev) => {
+      const next = new Map(prev);
+      for (const item of activeCart.items) {
+        const course = allCourses.find((c) => c.id === item.courseId);
+        const section = course?.sections.find((s) => s.id === item.sectionId);
+        if (!course || !section) continue;
+
+        const unmetPrereqs = course.prerequisites.some(
+          (g) => !g.options.some((o) => o.met)
+        );
+        const hasConflict = conflicts.some(
+          (c) => c.courseId === item.courseId && c.sectionId === item.sectionId
+        );
+        const isFull = section.enrolled >= section.capacity;
+
+        if (unmetPrereqs || hasConflict) continue;
+        if (isFull) {
+          next.set(course.id, EnrollmentStatus.WAITLISTED);
+        } else {
+          next.set(course.id, EnrollmentStatus.ENROLLED);
+        }
+      }
+      return next;
+    });
+  }, [activeCart.items, conflicts]);
 
   const selectCourse = useCallback(
     (courseId: string) => dispatch({ type: "SELECT_COURSE", courseId }),
@@ -397,8 +447,12 @@ export function SchedulerProvider({ children }: { children: ReactNode }) {
       calendarBlocks,
       conflicts,
       isCheckoutMode,
+      isSuccessMode,
+      getEffectiveEnrollmentStatus,
       enterCheckout,
       exitCheckout,
+      confirmEnrollment,
+      dismissSuccess,
       selectCourse,
       clearSelection,
       addToCart,
@@ -420,8 +474,12 @@ export function SchedulerProvider({ children }: { children: ReactNode }) {
       calendarBlocks,
       conflicts,
       isCheckoutMode,
+      isSuccessMode,
+      getEffectiveEnrollmentStatus,
       enterCheckout,
       exitCheckout,
+      confirmEnrollment,
+      dismissSuccess,
       selectCourse,
       clearSelection,
       addToCart,

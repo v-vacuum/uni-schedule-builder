@@ -40,7 +40,8 @@ export function CourseTopBar({ course }: CourseHeaderProps) {
 }
 
 export function CourseTopBarPills({ course }: CourseHeaderProps) {
-  const enrollment = ENROLLMENT_COLORS[course.enrollmentStatus];
+  const { getEffectiveEnrollmentStatus } = useScheduler();
+  const enrollment = ENROLLMENT_COLORS[getEffectiveEnrollmentStatus(course.id)];
 
   return (
     <>
