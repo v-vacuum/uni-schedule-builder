@@ -10,7 +10,7 @@ import { CourseTopBar, CourseTopBarFrame, CourseTopBarPills, CourseInfo, SEMESTE
 import { CourseDescription } from "./course-description";
 import { Prerequisites } from "./prerequisites";
 import { SectionCard } from "./section-card";
-import { Course } from "@/types";
+import { Course, EnrollmentStatus } from "@/types";
 
 const SLIDE_DURATION = 300;
 
@@ -81,7 +81,15 @@ export function CourseInfoView() {
       results = results.filter((c) => !c.noCredit);
     }
 
-    return results;
+    return results.toSorted((a, b) => {
+      const priority = (c: Course) => {
+        if (c.enrollmentStatus === EnrollmentStatus.ENROLLED) return 0;
+        if (c.enrollmentStatus === EnrollmentStatus.WAITLISTED) return 1;
+        if (c.requiredForMajors.length > 0) return 2;
+        return 3;
+      };
+      return priority(a) - priority(b);
+    });
   }, [state.searchQuery, state.filters]);
 
   const selectedCourse = state.selectedCourseId
