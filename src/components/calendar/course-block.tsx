@@ -40,12 +40,12 @@ export function CourseBlock({ block, animationState }: CourseBlockProps) {
       >
         {block.courseCode}
       </p>
-      <p className="truncate text-[10px] text-zinc-500">
+      {block.type === "tutorial" && (
+        <p className="text-[10px] font-bold" style={{ color: colors.text }}>TUT</p>
+      )}
+      <p className="truncate text-[10px]" style={{ color: colors.text }}>
         {formatTime(block.startTime)} – {formatTime(block.endTime)}
       </p>
-      {block.type === "tutorial" && (
-        <p className="text-[9px] font-medium text-zinc-400">TUT</p>
-      )}
       {height > 50 && (
         <svg
           className="absolute bottom-1 right-1 opacity-20"
