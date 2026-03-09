@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { ExternalLink, Info, MapPin, Star } from "lucide-react";
+import { ExternalLink, Info, MapPin, Plus, Star, X } from "lucide-react";
 import { TutorialRow } from "./tutorial-row";
 import { ReservedSeatingTooltip } from "./reserved-seating-tooltip";
 import { EnrollmentStatus, LectureSection } from "@/types";
@@ -148,7 +148,7 @@ export function SectionCard({
         </div>
       </div>
 
-      {section.tutorials.length > 0 && (
+      {section.tutorials.length > 0 ? (
         <div className="border-t border-zinc-200 px-4 py-2.5 space-y-1.5">
           <p className="text-[9px] font-semibold uppercase text-zinc-500" style={{ letterSpacing: "0.8px" }}>
             Tutorials
@@ -162,6 +162,29 @@ export function SectionCard({
               alreadyInCart={sectionInCart && inCart(tut.id)}
             />
           ))}
+        </div>
+      ) : (
+        <div className="border-t border-zinc-200 px-3.5 py-2.5 flex justify-end">
+          {sectionInCart ? (
+            <button
+              onClick={handleRemoveTutorial}
+              aria-label={`Remove section ${section.code}`}
+              className="flex h-7 items-center gap-1.5 rounded-md border border-zinc-200 px-2.5 text-xs font-medium text-zinc-500 hover:text-zinc-700 focus-visible:ring-2 focus-visible:ring-zinc-400 focus-visible:outline-none"
+              style={{ backgroundColor: "#ddf5af" }}
+            >
+              <X size={14} />
+              Remove
+            </button>
+          ) : (
+            <button
+              onClick={() => addToCart(courseId, section.id)}
+              aria-label={`Add section ${section.code}`}
+              className="flex h-7 items-center gap-1.5 rounded-md border border-zinc-300 px-2.5 text-xs font-medium text-zinc-500 transition-colors hover:border-zinc-900 hover:bg-zinc-900 hover:text-white focus-visible:ring-2 focus-visible:ring-zinc-400 focus-visible:outline-none"
+            >
+              <Plus size={14} />
+              Enroll
+            </button>
+          )}
         </div>
       )}
     </div>
