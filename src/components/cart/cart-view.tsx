@@ -23,11 +23,21 @@ export function CartView() {
     activeCart.items.map((item) => ({ item, state: "visible" as const }))
   );
   const prevKeysRef = useRef<Set<string>>(new Set(activeCart.items.map(itemKey)));
+  const prevCartIdRef = useRef(activeCart.id);
   const isFirstRender = useRef(true);
 
   useEffect(() => {
     if (isFirstRender.current) {
       isFirstRender.current = false;
+      return;
+    }
+
+    if (prevCartIdRef.current !== activeCart.id) {
+      prevCartIdRef.current = activeCart.id;
+      prevKeysRef.current = new Set(activeCart.items.map(itemKey));
+      setAnimatedItems(
+        activeCart.items.map((item) => ({ item, state: "visible" as const }))
+      );
       return;
     }
 
@@ -74,7 +84,7 @@ export function CartView() {
         prev.filter((ai) => ai.state !== "exiting")
       );
     }, 150);
-  }, [activeCart.items]);
+  }, [activeCart.id, activeCart.items]);
 
   return (
     <div className="flex h-full w-full shrink-0 flex-col bg-zinc-50">

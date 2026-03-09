@@ -198,6 +198,23 @@ export const COLOR_MAP: Record<
   [CourseColor.ORANGE]: { bg: "#ffd6b3", border: "#f0a870", text: "#6b3a1a" },
 };
 
+const BUILDING_NAMES: Record<string, string> = {
+  ST: "Science Theatres",
+  MS: "Math Science",
+  ICT: "Information & Communications Technology",
+  SS: "Social Science",
+  CHC: "Craigie Hall",
+};
+
+export function expandLocation(location: string): string {
+  if (location === "Online") return location;
+  const parts = location.split(" ");
+  if (parts.length >= 2 && BUILDING_NAMES[parts[0]]) {
+    return `${BUILDING_NAMES[parts[0]]} ${parts.slice(1).join(" ")}`;
+  }
+  return location;
+}
+
 const USED_COLORS: CourseColor[] = [
   CourseColor.PINK,
   CourseColor.BLUE,
