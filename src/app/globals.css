@@ -108,7 +108,7 @@ body {
 }
 
 .animate-cart-item-in {
-  animation: cart-item-in 200ms ease-out forwards;
+  animation: cart-item-in 120ms ease-out forwards;
 }
 
 @keyframes cart-item-out {
