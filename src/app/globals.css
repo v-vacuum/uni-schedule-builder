@@ -174,3 +174,13 @@ body {
 .animate-receipt-content-in {
   animation: receipt-content-in 300ms ease-out forwards;
 }
+
+@keyframes desc-word-out {
+  0% { opacity: 1; filter: blur(0); }
+  100% { opacity: 0; filter: blur(4px); }
+}
+
+@keyframes desc-word-in {
+  0% { opacity: 0; filter: blur(4px); }
+  100% { opacity: 1; filter: blur(0); }
+}
