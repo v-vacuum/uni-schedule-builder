@@ -184,7 +184,7 @@ export function CourseInfoView() {
     <>
       <div className="bg-white px-5 py-4 space-y-2.5">
         <CourseInfo course={course} />
-        <CourseDescription text={course.fullDescription} />
+        <CourseDescription shortText={course.description} longText={course.fullDescription} />
       </div>
       <div className="border-b border-zinc-300 bg-white px-5 pb-3.5">
         <Prerequisites groups={course.prerequisites} />
